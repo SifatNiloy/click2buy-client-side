@@ -120,54 +120,6 @@
     "quantity": 0
   },
   {
-    "category": "Men's Pants",
-    "name": "PRIMEBLUE SST TRACK PANTS",
-    "seller": "Addidas",
-    "price": 63,
-    "stock": 46,
-    "ratings": 4,
-    "ratingsCount": 50,
-    "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/52b5fde5829a4a04820dacf50127b969_9366/Adicolor_Classics_Primeblue_SST_Track_Pants_Blue_H06714_21_model.jpg",
-    "shipping": 20,
-    "quantity": 0
-  },
-  {
-    "category": "Men's Pants",
-    "name": "TIRO PANTS BLACK GOLD",
-    "seller": "Addidas",
-    "price": 115,
-    "stock": 26,
-    "ratings": 5,
-    "ratingsCount": 4557,
-    "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/c447324cf06544b78105ade500fd9e2f_9366/Tiro_Pants_Black_HI1073_21_model.jpg",
-    "shipping": 33,
-    "quantity": 0
-  },
-  {
-    "category": "Men's Pants",
-    "name": "OPEN HEM 3-STRIPES TRACK PANTS",
-    "seller": "Addidas",
-    "price": 58,
-    "stock": 41,
-    "ratings": 5,
-    "ratingsCount": 2140,
-    "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/d47f8bc94b2c401b9eafad23007fd8c4_9366/Primegreen_Essentials_Warm-Up_Open_Hem_3-Stripes_Track_Pants_Black_H48430_21_model.jpg",
-    "shipping": 49,
-    "quantity": 0
-  },
-  {
-    "category": "Men's Pants",
-    "name": "ESSENTIALS4GAMEDAY PANTS",
-    "seller": "Addidas",
-    "price": 185,
-    "stock": 43,
-    "ratings": 5,
-    "ratingsCount": 2676,
-    "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/64f1ba254925439d88eaad920127d77e_9366/Essentials4Gameday_Pants_Black_HE1800_21_model.jpg",
-    "shipping": 27,
-    "quantity": 0
-  },
-  {
     "category": "Men's Boot",
     "name": "TERREX FREE HIKER GORE-TEX HIKING SHOES",
     "seller": "Addidas",
@@ -335,42 +287,7 @@
     "shipping": 35,
     "quantity": 0
   },
-  {
-    "category": "Men's Sneaker",
-    "name": "OWN THE RUN LONG SLEEVE TEE",
-    "seller": "Addidas",
-    "price": 23,
-    "stock": 17,
-    "ratings": 3,
-    "ratingsCount": 4003,
-    "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/c6a321b7bb7243d28fe9ac71011393c7_9366/Own_the_Run_Long_Sleeve_Tee_Black_GJ9977_21_model.jpg",
-    "shipping": 2,
-    "quantity": 0
-  },
-  {
-    "category": "Men's Sneaker",
-    "name": "NYC BADGE OF SPORT LOGO GRAPHIC TEE",
-    "seller": "Addidas",
-    "price": 29,
-    "stock": 6,
-    "ratings": 3,
-    "ratingsCount": 805,
-    "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/e0101e13ac1940208478add1000e953a_9366/NYC_Badge_of_Sport_Logo_Graphic_Tee_White_HE2363_21_model.jpg",
-    "shipping": 6,
-    "quantity": 0
-  },
-  {
-    "category": "Men's Sneaker",
-    "name": "RUNNER TEE",
-    "seller": "Addidas",
-    "price": 20,
-    "stock": 7,
-    "ratings": 5,
-    "ratingsCount": 3343,
-    "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/8c3f5445517340e8bc02ad8100ffd3f6_9366/Runner_Tee_Burgundy_H25050_21_model.jpg",
-    "shipping": 48,
-    "quantity": 0
-  },
+
   {
     "category": "Men's Sneaker",
     "name": "ESSENTIALS COLORBLOCK TEE",
