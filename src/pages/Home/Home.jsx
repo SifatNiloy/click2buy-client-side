@@ -1,10 +1,14 @@
 import Banner from "./Banner";
+import Brands from "./Brands";
+import Catagories from "./Catagories";
 
 const Home = () => {
   return (
-    <div>
-        <Banner/>
-      <h2>Home</h2>
+    <div className="mx-auto container">
+      <Banner />
+      <Catagories />
+      <Brands />
+
     </div>
   );
 };

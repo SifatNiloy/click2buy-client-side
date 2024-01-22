@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import smartphone from "../../../assets/catagories/smartphone.jpg";
-import sneckers from "../../../assets/catagories/sneckers.jpg";
-import watch from "../../../assets/catagories/watch.jpg";
+import smartphone from "../../assets/catagories/smartphone.jpg";
+import sneckers from "../../assets/catagories/sneckers.jpg";
+import watch from "../../assets/catagories/watch.jpg";
 import "./Catagories.css";
 const Catagories = () => {
   return (

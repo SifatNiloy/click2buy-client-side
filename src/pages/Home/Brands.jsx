@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import apple from "../../../assets/brands/apple.jpg";
-import samsung from "../../../assets/brands/samsung.jpg";
-import sony from "../../../assets/brands/sony.jpg";
-import xiaomi from "../../../assets/brands/xiaomi.jpg";
-import nike from "../../../assets/brands/nike.jpg";
+import apple from "../../assets/brands/apple.jpg";
+import samsung from "../../assets/brands/samsung.jpg";
+import sony from "../../assets/brands/sony.jpg";
+import xiaomi from "../../assets/brands/xiaomi.jpg";
+import nike from "../../assets/brands/nike.jpg";
 
 const Brands = () => {
   return (
