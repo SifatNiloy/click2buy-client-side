@@ -13,6 +13,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@smastrom/react-rating": "^1.4.0",
     "aos": "^3.0.0-beta.6",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.3",
@@ -20,7 +21,8 @@
     "react-awesome-slider": "^4.1.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.3",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "swiper": "^11.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

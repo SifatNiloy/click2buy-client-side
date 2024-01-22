@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Alice Johnson",
+    "description": "Smartphone X is amazing! Fast and sleek design. The camera quality is excellent. Highly recommended.",
+    "rating": 5
+  },
+  {
+    "id": 2,
+    "name": "Bob Smith",
+    "description": "Laptop Pro is fantastic! Powerful performance and lightweight. Great for both work and gaming. Impressed!",
+    "rating": 4.5
+  },
+  {
+    "id": 3,
+    "name": "Eva Martinez",
+    "description": "I love the Beauty Cream! The smooth texture and hydration are outstanding. Noticed a significant improvement in skin tone.",
+    "rating": 5
+  },
+  {
+    "id": 4,
+    "name": "Chris Turner",
+    "description": "The Hair Dryer Deluxe is excellent! Fast drying with multiple heat settings. Leaves my hair silky and smooth. Very satisfied.",
+    "rating": 4
+  },
+  {
+    "id": 5,
+    "name": "Grace Miller",
+    "description": "The Educational Toy ABC is perfect for my kids! Engaging and educational, helping them learn the alphabet in a fun way.",
+    "rating": 5
+  },
+  {
+    "id": 6,
+    "name": "David Lee",
+    "description": "The Remote Control Car is a hit! Sturdy build and easy to control. Provides hours of entertainment for my little one.",
+    "rating": 3
+  },
+  {
+    "id": 7,
+    "name": "Sophie Taylor",
+    "description": "Wireless Earbuds are amazing! Crystal-clear sound and a comfortable fit. Great value for money. I'm impressed with the quality.",
+    "rating": 5
+  },
+  {
+    "id": 8,
+    "name": "Oliver White",
+    "description": "The Anti-Aging Serum is fantastic! Lightweight formula that reduces fine lines. My skin feels rejuvenated and refreshed.",
+    "rating": 4
+  },
+  {
+    "id": 9,
+    "name": "Emma Clark",
+    "description": "The Building Blocks Set is a hit with my kids! Durable and colorful, inspiring creativity. A great addition to our playtime.",
+    "rating": 3.5
+  },
+  {
+    "id": 10,
+    "name": "Max Roberts",
+    "description": "Fitness Tracker is a game-changer! Accurate tracking, stylish design, and motivating for daily workouts. Highly recommend it.",
+    "rating": 4
+  }
+]
