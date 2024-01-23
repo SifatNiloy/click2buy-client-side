@@ -1,5 +1,3 @@
-import React from "react";
-
 const HomeProducts = ({ product }) => {
   const { name, seller, price, stock, ratings, img, quantity } = product;
   return (
