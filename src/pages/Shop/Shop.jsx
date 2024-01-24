@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import "./Shop.css";
 import NotFound from "../Shared/NotFound";
 import Products from "../Products/Products";
 const Shop = () => {
@@ -80,10 +79,10 @@ const Shop = () => {
           )}
         </div>
         {/* <p className='mt-12'>currently selected page: {page} and size :{size}</p> */}
-        <div className="pagination my-12 flex justify-center gap-6 ">
+        <div className="join my-12 flex justify-center gap-6 ">
           {[...Array(pages).keys()].map((number) => (
             <button
-              className={page === number + 1 && "selected"}
+              className={page === number + 1 && "join-item btn btn-md"}
               key={number}
               onClick={() => setPage(number + 1)}
             >
