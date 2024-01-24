@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet";
 import Banner from "./Banner";
 import Brands from "./Brands";
 import Catagories from "./Catagories";
+import LimitedProducts from "./LimitedProducts";
 import Reviews from "./Reviews";
 
 const Home = () => {
@@ -13,7 +14,7 @@ const Home = () => {
       <Banner />
       <Catagories />
       <Brands />
-
+      <LimitedProducts />
       <Reviews />
     </div>
   );
