@@ -6,6 +6,7 @@ import Home from "../pages/Home/Home";
 import Sell from "../pages/Sell/Sell";
 import NotFound from "../pages/Shared/NotFound";
 import Shop from "../pages/Shop/Shop";
+import Login from "../pages/Login/Login";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
       {
         path: "/sell",
         element: <Sell />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
     ],
   },

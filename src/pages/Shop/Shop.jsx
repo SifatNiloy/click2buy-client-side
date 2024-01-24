@@ -90,11 +90,11 @@ const Shop = () => {
             </button>
           ))}
           <select onChange={(event) => setSize(event.target.value)}>
-            <option value="5">5</option>
-            <option value="10" defaultValue={10}>
-              10
+            <option value="12" defaultValue={12}>12</option>
+            <option value="20" >
+              20
             </option>
-            <option value="15">15</option>
+            <option value="24">24</option>
           </select>
         </div>
       </div>
