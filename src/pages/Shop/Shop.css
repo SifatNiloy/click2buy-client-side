@@ -1,0 +1,16 @@
+.pagination button {
+  color: rgb(0, 54, 230);
+  background-color: rgb(157, 241, 241);
+  font-size: 20px;
+  border: 2px solid rgb(92, 160, 250);
+  border-radius: 22px;
+  padding: 5px 15px;
+}
+/* .pagination button:hover{
+    background-color:rgb(1, 217, 255); 
+} */
+.pagination .selected {
+  background-color: rgb(50, 143, 250);
+  border: 2px solid rgb(50, 136, 248);
+  font-weight: bold;
+}
