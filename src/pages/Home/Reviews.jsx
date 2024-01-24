@@ -1,4 +1,4 @@
-import SectionTitle from "../../components/SectionTitle";
+import SectionTitle from "../../SectionTitle/SectionTitle";
 
 import React, { useEffect, useState } from "react";
 // Import Swiper React components
