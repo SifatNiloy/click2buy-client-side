@@ -6,6 +6,7 @@ import {
   loadCaptchaEnginge,
   validateCaptcha,
 } from "react-simple-captcha";
+import Swal from "sweetalert2";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 const Login = () => {
@@ -15,7 +16,11 @@ const Login = () => {
   const { signIn } = useContext(AuthContext);
 
   useEffect(() => {
-    loadCaptchaEnginge(6);
+    // Load captcha only if it's not already loaded
+    if (!captchaRef.current || !captchaRef.current.loaded) {
+      loadCaptchaEnginge(6);
+      captchaRef.current.loaded = true; // Mark as loaded
+    }
   }, []);
   const handleValidateCaptcha = () => {
     const user_captcha_value = captchaRef.current.value;
@@ -40,7 +45,7 @@ const Login = () => {
         icon: "success",
         title: "User Logged in successful",
         showConfirmButton: false,
-        timer: 1500,
+        timer: 500,
       });
     });
   };
@@ -104,6 +109,7 @@ const Login = () => {
                   required
                 />
                 <button
+                  type="button" // Add this line to prevent form submission
                   onClick={handleValidateCaptcha}
                   className="btn btn-outline btn-xs mt-3"
                 >
