@@ -48,9 +48,9 @@ const Login = () => {
         icon: "success",
         title: "User Logged in successful",
         showConfirmButton: false,
-        timer: 500,
+        timer: 1000,
       });
-      navigate(from, {replace: true})
+      navigate(from, { replace: true });
     });
   };
 
