@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
@@ -14,7 +14,10 @@ const Login = () => {
   const [disabled, setDisabled] = useState(true);
 
   const { signIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  let from = location.state?.from?.pathname || "/";
   useEffect(() => {
     // Load captcha only if it's not already loaded
     if (!captchaRef.current || !captchaRef.current.loaded) {
@@ -47,6 +50,7 @@ const Login = () => {
         showConfirmButton: false,
         timer: 500,
       });
+      navigate(from, {replace: true})
     });
   };
 
