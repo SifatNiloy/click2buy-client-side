@@ -56,7 +56,7 @@ const Navbar = () => {
       <div className="navbar-end">
         {user?.email ? (
           <button onClick={logOut} className="btn btn-accent">
-            <Link to="/login">Logout</Link>
+            <Link to="/login">Logout - <span>{user?.displayName}</span> </Link>
           </button>
         ) : (
           <button className="btn btn-accent">
