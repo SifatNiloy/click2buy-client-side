@@ -18,7 +18,7 @@ module.exports = {
     ],
   },
 };
-rules: {
-  "react/prop-types": "off",
+// rules: {
+//   "react/prop-types": "off",
   
 },

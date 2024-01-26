@@ -3,9 +3,11 @@ import { HiShoppingCart } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import logo from "../../assets/logo.png";
+import useCart from "../../hooks/useCart";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
 
   const handleLogOut = () => {
     logOut()
@@ -31,10 +33,8 @@ const Navbar = () => {
       </li>
       <li className="text-lg mt-1">
         <Link to="/sell">
-          
-            <HiShoppingCart />
-            <span className="badge badge-secondary">+99</span>
-          
+          <HiShoppingCart />
+          <span className="badge badge-secondary">+{cart?.length || 0}</span>
         </Link>
       </li>
     </>

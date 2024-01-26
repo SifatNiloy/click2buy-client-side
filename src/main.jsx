@@ -6,10 +6,13 @@ import AuthProvider from "./Providers/AuthProvider";
 import { router } from "./Routes/Routes";
 import "./index.css";
 
+// Created a QueryClient instance
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <QueryClientProvider client={QueryClient}>
+      <QueryClientProvider client={queryClient}>
         <div className="max-w-screen-xl mx-auto">
           <RouterProvider router={router} />
         </div>
