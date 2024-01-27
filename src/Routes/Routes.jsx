@@ -10,6 +10,10 @@ import Private from "../pages/Shared/Private";
 import Shop from "../pages/Shop/Shop";
 import SignUp from "../pages/SignUp/SignUp";
 import PrivateRoutes from "./PrivateRoutes";
+import Dashboard from "../Layout/Dashboard";
+import MyOrders from "../pages/Dashboard/MyOrders";
+import Reservation from "../pages/Dashboard/Reservation";
+import Payment from "../pages/Dashboard/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -55,5 +59,24 @@ export const router = createBrowserRouter([
         ),
       },
     ],
+    
   },
+  {
+    path: "/dashboard",
+    element: <Dashboard/>,
+    children: [
+      {
+        path:'myorders',
+        element:<MyOrders/>
+      },
+      {
+        path:'reservation',
+        element:<Reservation/>
+      },
+      {
+        path:'payment',
+        element:<Payment/>
+      },
+    ]
+  }
 ]);

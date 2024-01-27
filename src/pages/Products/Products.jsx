@@ -7,7 +7,7 @@ import useCart from "../../hooks/useCart";
 const Products = ({ product }) => {
   const { name, seller, price, stock, ratings, img, _id } = product;
   const { user } = useContext(AuthContext);
-  const [, refetch] = useCart();
+  const [cart, refetch] = useCart();
   const navigate = useNavigate();
   const location = useLocation();
 

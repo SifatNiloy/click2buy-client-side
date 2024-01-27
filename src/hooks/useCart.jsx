@@ -5,7 +5,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 const useCart = () => {
   const { user } = useContext(AuthContext);
   const {
-    data: cart = [],
+    data: orders = [],
     error,
     refetch,
   } = useQuery({
@@ -18,7 +18,7 @@ const useCart = () => {
     },
   });
 
-  return [cart, refetch];
+  return [orders, refetch];
 };
 
 export default useCart;
