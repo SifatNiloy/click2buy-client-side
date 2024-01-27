@@ -5,22 +5,24 @@ import { HiShoppingCart } from "react-icons/hi";
 import { NavLink, Outlet } from "react-router-dom";
 const Dashboard = () => {
   return (
-    <div className="drawer fixed top-0 left-0 h-screen flex items-center justify-center">
-      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content">
+    <div className="drawer lg:drawer-open">
+      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content flex flex-col items-center justify-center">
         <Outlet></Outlet>
-        <label htmlFor="my-drawer" className="btn text-center btn-primary drawer-button">
+        <label
+          htmlFor="my-drawer-2"
+          className="btn btn-primary drawer-button lg:hidden"
+        >
           Open drawer
         </label>
       </div>
       <div className="drawer-side">
         <label
-          htmlFor="my-drawer"
+          htmlFor="my-drawer-2"
           aria-label="close sidebar"
-        //   className="drawer-overlay"
+          className="drawer-overlay"
         ></label>
         <ul className="menu p-4 w-80 min-h-full bg-blue-100 text-base-content">
-          
           <li>
             <NavLink to="/">
               <AiFillHome /> User Home
