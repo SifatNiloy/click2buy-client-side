@@ -2,10 +2,12 @@ import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Providers/AuthProvider";
+import useCart from "../../hooks/useCart";
 
 const Products = ({ product }) => {
   const { name, seller, price, stock, ratings, img, _id } = product;
   const { user } = useContext(AuthContext);
+  const [, refetch] = useCart();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -20,9 +22,9 @@ const Products = ({ product }) => {
         stock,
         ratings,
         img,
-        _id,
         email: user.email,
       };
+      console.log("Order Item:", orderItem);
       fetch("http://localhost:5000/orders", {
         method: "POST",
         headers: {
@@ -33,8 +35,9 @@ const Products = ({ product }) => {
         .then((res) => res.json())
         .then((data) => {
           if (data.insertedId) {
+            refetch();
             Swal.fire({
-              position: "top-end",
+              position: "middle",
               icon: "success",
               title: "added to cart",
               showConfirmButton: false,
