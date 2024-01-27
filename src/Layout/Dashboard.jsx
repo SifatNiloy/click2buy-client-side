@@ -5,11 +5,11 @@ import { HiShoppingCart } from "react-icons/hi";
 import { NavLink, Outlet } from "react-router-dom";
 const Dashboard = () => {
   return (
-    <div className="drawer">
+    <div className="drawer fixed top-0 left-0 h-screen flex items-center justify-center">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
-        <Outlet />
-        <label htmlFor="my-drawer" className="btn btn-primary drawer-button">
+        <Outlet></Outlet>
+        <label htmlFor="my-drawer" className="btn text-center btn-primary drawer-button">
           Open drawer
         </label>
       </div>
@@ -17,10 +17,10 @@ const Dashboard = () => {
         <label
           htmlFor="my-drawer"
           aria-label="close sidebar"
-          className="drawer-overlay"
+        //   className="drawer-overlay"
         ></label>
         <ul className="menu p-4 w-80 min-h-full bg-blue-100 text-base-content">
-          {/* Sidebar content here */}
+          
           <li>
             <NavLink to="/">
               <AiFillHome /> User Home
