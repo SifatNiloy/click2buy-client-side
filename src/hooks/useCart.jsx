@@ -11,6 +11,9 @@ const useCart = () => {
   } = useQuery({
     queryKey: ["orders", user?.email],
     queryFn: async () => {
+      if (!user?.email) {
+        return []; // Return an empty array if user.email is not available
+      }
       const res = await fetch(
         `http://localhost:5000/orders?email=${user?.email}`
       );
