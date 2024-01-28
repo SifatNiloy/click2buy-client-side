@@ -69,7 +69,7 @@ const Shop = () => {
       </div>
       <div>
         {/* <h2>products: {products?.length} </h2> */}
-        <div className="grid grid-cols-4 justify-center gap-4">
+        <div className="grid lg:grid-cols-4 place-items-center gap-6 sm:grid-cols-1 md:grid-cols-2 ">
           {products.length > 0 ? (
             products.map((product) => (
               <Products product={product} key={product._id} />

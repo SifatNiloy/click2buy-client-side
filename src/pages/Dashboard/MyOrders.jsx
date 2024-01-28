@@ -37,10 +37,12 @@ const MyOrders = () => {
   };
 
   return (
-    <div >
+    <div>
       <h2>My Orders</h2>
-      <h2>Total items: {orders.length}</h2>
-      <h2>total price: ${total} </h2>
+      <div className="flex gap-12 text-2xl text-orange-900">
+        <h2>Total items: {orders.length}</h2>
+        <h2>Total price: ${total} </h2>
+      </div>
       <button className="btn btn-sm btn-primary">Pay</button>
       <div className="overflow-x-auto">
         <table className="table">
@@ -82,7 +84,7 @@ const MyOrders = () => {
                   </div>
                 </td>
 
-                <th >
+                <th>
                   <button
                     onClick={() => handleDelete(item)}
                     className="btn btn-ghost btn-lg text-red-500"
