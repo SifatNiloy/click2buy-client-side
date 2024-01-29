@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import apple from "../../assets/brands/apple.jpg";
 import samsung from "../../assets/brands/samsung.jpg";
 import sony from "../../assets/brands/sony.jpg";
@@ -15,7 +15,7 @@ const Brands = () => {
       <div className="flex my-6">
         <h2 className="text-3xl font-bold">Explore Popular Brands |</h2>
         <p className="text-3xl ml-6">
-          See All <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
+          See All 
         </p>
       </div>
       <div className="grid md:grid-cols-5 gap-10">

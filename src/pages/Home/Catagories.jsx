@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import smartphone from "../../assets/catagories/smartphone.jpg";
 import sneckers from "../../assets/catagories/sneckers.jpg";
 import watch from "../../assets/catagories/watch.jpg";
@@ -14,7 +14,7 @@ const Catagories = () => {
         <h2 className="text-3xl font-bold">Explore Popular Catagories |</h2>
         <p className="text-3xl ml-6">
           {" "}
-          See All <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
+          See All 
         </p>
       </div>
       <div data-aos="fade-up" className="grid md:grid-cols-5 gap-10">
