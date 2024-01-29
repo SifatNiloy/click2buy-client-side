@@ -16,12 +16,14 @@ const SocialLogin = () => {
       .then((result) => {
         console.log("Social login successful:", result);
         const loggedInUser = result.user;
-        //save user data
+  
+        // Save user data
         const saveUser = {
           name: loggedInUser.displayName,
           email: loggedInUser.email,
-        //   photo: loggedInUser.photoURL,
+          photo: loggedInUser.photoURL,
         };
+  
         fetch(`http://localhost:5000/users`, {
           method: "POST",
           headers: {
@@ -30,19 +32,12 @@ const SocialLogin = () => {
           body: JSON.stringify(saveUser),
         })
           .then((res) => res.json())
-          .then((data) => {
-            console.log("found it", data);
-            if (data.insertedId) {
-              
-              navigate(from, { replace: true });
-            }
+          .then(() => {
+            navigate(from, { replace: true });
           });
-      })
-      .catch((error) => {
-        console.error("Error during Google sign-in:", error);
-        // Handle the error, show a notification, or perform other actions
       });
   };
+  
 
   return (
     <div>
