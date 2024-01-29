@@ -1,9 +1,15 @@
 import React from "react";
 import { AiFillHome } from "react-icons/ai";
 import { FaRegCalendarAlt, FaWallet } from "react-icons/fa";
+import { FaUsersLine } from "react-icons/fa6";
+import { TbBrandBooking } from "react-icons/tb";
 import { HiShoppingCart } from "react-icons/hi";
+import { MdProductionQuantityLimits } from "react-icons/md";
+
 import { NavLink, Outlet } from "react-router-dom";
 const Dashboard = () => {
+  //for admin panel
+  const isAdmin = true;
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -23,26 +29,59 @@ const Dashboard = () => {
           className="drawer-overlay"
         ></label>
         <ul className="menu p-4 w-80 min-h-full bg-blue-100 text-base-content">
-          <li>
-            <NavLink to="/">
-              <AiFillHome /> User Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard/reservation">
-              <FaRegCalendarAlt /> Reservation
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard/myorders">
-              <HiShoppingCart /> My Cart
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard/payment">
-              <FaWallet /> Payment History
-            </NavLink>
-          </li>
+          {isAdmin ? (
+            <>
+              <li>
+                <NavLink to="/">
+                  <AiFillHome /> Admin Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/reservation">
+                  <FaRegCalendarAlt /> Add Products
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/myorders">
+                <MdProductionQuantityLimits /> Manage Products
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/payment">
+                <TbBrandBooking /> Manage Bookings
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/allusers">
+                  <FaUsersLine /> Manage users
+                </NavLink>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink to="/">
+                  <AiFillHome /> User Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/reservation">
+                  <FaRegCalendarAlt /> Reservation
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/myorders">
+                  <HiShoppingCart /> My Cart
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/payment">
+                  <FaWallet /> Payment History
+                </NavLink>
+              </li>
+            </>
+          )}
+
           <div className="divider"></div>
           <li>
             <NavLink to="/">

@@ -14,6 +14,7 @@ import Dashboard from "../Layout/Dashboard";
 import MyOrders from "../pages/Dashboard/MyOrders";
 import Reservation from "../pages/Dashboard/Reservation";
 import Payment from "../pages/Dashboard/Payment";
+import AllUsers from "../pages/Dashboard/AllUsers";
 
 export const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
       {
         path:'payment',
         element:<Payment/>
+      },
+      {
+        path:'allusers',
+        element:<AllUsers/>
       },
     ]
   }
