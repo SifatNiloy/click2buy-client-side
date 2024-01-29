@@ -2,14 +2,15 @@ import React from "react";
 import { AiFillHome } from "react-icons/ai";
 import { FaRegCalendarAlt, FaWallet } from "react-icons/fa";
 import { FaUsersLine } from "react-icons/fa6";
-import { TbBrandBooking } from "react-icons/tb";
 import { HiShoppingCart } from "react-icons/hi";
 import { MdProductionQuantityLimits } from "react-icons/md";
+import { TbBrandBooking } from "react-icons/tb";
 
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../hooks/useAdmin";
 const Dashboard = () => {
-  //for admin panel
-  const isAdmin = true;
+  
+  const [isAdmin, isAdminLoading] = useAdmin();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -43,12 +44,12 @@ const Dashboard = () => {
               </li>
               <li>
                 <NavLink to="/dashboard/myorders">
-                <MdProductionQuantityLimits /> Manage Products
+                  <MdProductionQuantityLimits /> Manage Products
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/dashboard/payment">
-                <TbBrandBooking /> Manage Bookings
+                  <TbBrandBooking /> Manage Bookings
                 </NavLink>
               </li>
               <li>
