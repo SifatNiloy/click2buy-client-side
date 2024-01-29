@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Providers/AuthProvider";
+import SocialLogin from "../Shared/SocialLogin";
 
 const SignUp = () => {
   const {
@@ -183,6 +184,15 @@ const SignUp = () => {
                   value="Sign Up"
                 />
               </div>
+              <p>
+                Already have an account?
+                <Link className="text-warning" to="/login">
+                  Please Login
+                </Link>
+              </p>
+
+              <div className="divider">OR</div>
+              <SocialLogin />
             </form>
           </div>
         </div>

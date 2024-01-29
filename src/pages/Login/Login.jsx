@@ -8,6 +8,7 @@ import {
 } from "react-simple-captcha";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Providers/AuthProvider";
+import SocialLogin from "../Shared/SocialLogin";
 
 const Login = () => {
   const captchaRef = useRef(null);
@@ -136,9 +137,7 @@ const Login = () => {
               </p>
 
               <div className="divider">OR</div>
-              <button className="btn btn-outline btn-primary w-full">
-                Login with google
-              </button>
+              <SocialLogin/>
             </form>
           </div>
         </div>
