@@ -1,13 +1,17 @@
 import { useForm } from "react-hook-form";
 import SectionTitle from "../../SectionTitle/SectionTitle";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const img_upload_token = import.meta.env.VITE_IMG_UPLOAD_TOKEN;
 
 const AddItem = () => {
+  const axiosSecure = useAxiosSecure();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_upload_token}`;
@@ -24,6 +28,33 @@ const AddItem = () => {
       .then((res) => res.json())
       .then((imgData) => {
         console.log(imgData);
+        if (imgData.success) {
+          //getting the image url
+          const imgURL = imgData.data.display_url;
+          // getting all product related data
+          const { catagory, name, seller, price, stock } = data;
+          // merging product data with image url into a single object named productItem
+          const productItem = {
+            catagory,
+            name,
+            seller,
+            price: parseFloat(price),
+            stock,
+            image: imgURL,
+          };
+          console.log(productItem);
+          axiosSecure.post("/products", productItem).then((data) => {
+            console.log("after posting new product data", data.data);
+            if (data.data.insertedId){
+              reset();
+              Swal.fire({
+                title: "Added Successfully",
+                text: "Your product has been added.",
+                icon: "success",
+              });
+            }
+          });
+        }
       });
   };
 
@@ -35,7 +66,7 @@ const AddItem = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="grid w-full my-2">
         <select
           defaultValue="Select Catagory"
-          {...register("firstName", { required: true })}
+          {...register("catagory", { required: true })}
           className="select select-bordered w-full "
         >
           <option disabled>Select Catagory</option>
