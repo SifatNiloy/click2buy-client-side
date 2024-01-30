@@ -8,8 +8,8 @@ import { TbBrandBooking } from "react-icons/tb";
 
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
+
 const Dashboard = () => {
-  
   const [isAdmin, isAdminLoading] = useAdmin();
   return (
     <div className="drawer lg:drawer-open">
@@ -38,7 +38,7 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/reservation">
+                <NavLink to="/dashboard/addItem">
                   <FaRegCalendarAlt /> Add Products
                 </NavLink>
               </li>

@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
 
 const useCart = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const token = localStorage.getItem("access-token");
   const {
     data: orders = [],
@@ -11,6 +11,7 @@ const useCart = () => {
     refetch,
   } = useQuery({
     queryKey: ["orders", user?.email],
+    enabled: !loading,
     queryFn: async () => {
       if (!user?.email) {
         return []; // Return an empty array if user.email is not available
