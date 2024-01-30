@@ -1,26 +1,44 @@
 import { useForm } from "react-hook-form";
 import SectionTitle from "../../SectionTitle/SectionTitle";
 
+const img_upload_token = import.meta.env.VITE_IMG_UPLOAD_TOKEN;
+
 const AddItem = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
-  console.log(errors);
+
+  const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_upload_token}`;
+  // console.log(img_hosting_url);
+  const onSubmit = (data) => {
+    console.log(data);
+    const formData = new FormData();
+    console.log(formData);
+    formData.append("image", data.file[0]);
+    fetch(img_hosting_url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgData) => {
+        console.log(imgData);
+      });
+  };
+
+  // console.log(img_upload_token);
 
   return (
     <div className="w-full px-24 my-12">
       <SectionTitle heading="Add product"></SectionTitle>
       <form onSubmit={handleSubmit(onSubmit)} className="grid w-full my-2">
         <select
+          defaultValue="Select Catagory"
           {...register("firstName", { required: true })}
           className="select select-bordered w-full "
         >
-          <option disabled selected>
-            Select Catagory
-          </option>
+          <option disabled>Select Catagory</option>
           <option>Men's Sneaker</option>
           <option>Women's Sneaker</option>
           <option>Men's Pants</option>
