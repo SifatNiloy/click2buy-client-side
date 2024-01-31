@@ -4,11 +4,13 @@ import Main from "../Layout/Main";
 import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
 import AddItem from "../pages/Dashboard/AddItem";
+import AdminHome from "../pages/Dashboard/AdminHome";
 import AllUsers from "../pages/Dashboard/AllUsers";
 import ManageProducts from "../pages/Dashboard/ManageProducts";
 import MyOrders from "../pages/Dashboard/MyOrders";
 import Payment from "../pages/Dashboard/Payment";
 import Reservation from "../pages/Dashboard/Reservation";
+import UserHome from "../pages/Dashboard/UserHome";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Sell from "../pages/Sell/Sell";
@@ -72,6 +74,18 @@ export const router = createBrowserRouter([
       </PrivateRoutes>
     ),
     children: [
+      {
+        path: "userhome",
+        element: <UserHome />,
+      },
+      {
+        path: "adminhome",
+        element: (
+          <AdminRoutes>
+            <AdminHome />
+          </AdminRoutes>
+        ),
+      },
       {
         path: "myorders",
         element: <MyOrders />,

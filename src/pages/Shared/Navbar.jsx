@@ -3,10 +3,12 @@ import { HiShoppingCart } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import logo from "../../assets/logo.png";
+import useAdmin from "../../hooks/useAdmin";
 import useCart from "../../hooks/useCart";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
   const [orders] = useCart();
 
   const handleLogOut = () => {
@@ -37,7 +39,11 @@ const Navbar = () => {
           <span className="badge badge-secondary">+{orders?.length || 0}</span>
         </Link>
       </li>
-     
+      <li className="text-lg ">
+        <Link to={isAdmin ? "/dashboard/adminhome" : "/dashboard/userhome"}>
+          Dashboard
+        </Link>
+      </li>
     </>
   );
 
