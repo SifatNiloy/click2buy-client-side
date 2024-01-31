@@ -5,6 +5,7 @@ import About from "../pages/About/About";
 import Contact from "../pages/Contact/Contact";
 import AddItem from "../pages/Dashboard/AddItem";
 import AllUsers from "../pages/Dashboard/AllUsers";
+import ManageProducts from "../pages/Dashboard/ManageProducts";
 import MyOrders from "../pages/Dashboard/MyOrders";
 import Payment from "../pages/Dashboard/Payment";
 import Reservation from "../pages/Dashboard/Reservation";
@@ -92,6 +93,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoutes>
             <AddItem />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "manageproducts",
+        element: (
+          <AdminRoutes>
+            <ManageProducts />
           </AdminRoutes>
         ),
       },

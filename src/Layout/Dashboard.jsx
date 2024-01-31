@@ -43,15 +43,11 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/myorders">
+                <NavLink to="/dashboard/manageproducts">
                   <MdProductionQuantityLimits /> Manage Products
                 </NavLink>
               </li>
-              <li>
-                <NavLink to="/dashboard/payment">
-                  <TbBrandBooking /> Manage Bookings
-                </NavLink>
-              </li>
+              
               <li>
                 <NavLink to="/dashboard/allusers">
                   <FaUsersLine /> Manage users
