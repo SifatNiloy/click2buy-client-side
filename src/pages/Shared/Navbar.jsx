@@ -39,11 +39,15 @@ const Navbar = () => {
           <span className="badge badge-secondary">+{orders?.length || 0}</span>
         </Link>
       </li>
-      <li className="text-lg ">
-        <Link to={isAdmin ? "/dashboard/adminhome" : "/dashboard/userhome"}>
-          Dashboard
-        </Link>
-      </li>
+      {user ? (
+        <li className="text-lg ">
+          <Link to={isAdmin ? "/dashboard/adminhome" : "/dashboard/userhome"}>
+            Dashboard
+          </Link>
+        </li>
+      ) : (
+        <></>
+      )}
     </>
   );
 
