@@ -9,12 +9,49 @@ const AdminHome = () => {
     queryKey: ["admin-stats"],
     queryFn: async () => {
       const res = await axiosSecure("/admin-stats");
-      return res.data();
+      return res.data;
     },
   });
   return (
     <div>
-      <h2>Admin Home</h2>
+      <h2 className="font-bold text-3xl">Admin Home</h2>
+      <div className="stats bg-primary text-primary-content ">
+        <div className="stat">
+          <div className="stat-title text-white text-2xl font-bold">
+            Total users
+          </div>
+          <div className="stat-value text-white text-2xl font-bold">
+            {stats?.users}
+          </div>
+        </div>
+        <div className="border-l border-white h-100 "></div>
+        <div className="stat">
+          <div className="stat-title  text-white text-2xl font-bold">
+            Total Products
+          </div>
+          <div className="stat-value  text-white text-2xl font-bold">
+            {stats.products}
+          </div>
+        </div>
+        <div className="border-l border-white h-100 "></div>
+        <div className="stat">
+          <div className="stat-title  text-white text-2xl font-bold">
+            Total Orders
+          </div>
+          <div className="stat-value  text-white text-2xl font-bold">
+            {stats.orders}
+          </div>
+        </div>
+        <div className="border-l border-white h-100 "></div>
+        <div className="stat">
+          <div className="stat-title  text-white text-2xl font-bold">
+            Total Ordered price
+          </div>
+          <div className="stat-value  text-white text-2xl font-bold">
+            {stats.totalPrice}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
