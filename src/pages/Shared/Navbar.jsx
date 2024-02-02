@@ -33,12 +33,17 @@ const Navbar = () => {
       <li className="text-lg ">
         <Link to="/sell">Sell</Link>
       </li>
-      <li className="text-lg mt-1">
-        <Link to="/dashboard">
-          <HiShoppingCart />
-          <span className="badge badge-secondary">+{orders?.length || 0}</span>
-        </Link>
-      </li>
+
+      {user ? (
+        <li className="text-lg mt-1">
+          <Link to={isAdmin ? "/dashboard/adminhome" : "/dashboard/userhome"}>
+            <HiShoppingCart />
+            <span className="badge badge-secondary">
+              +{orders?.length || 0}
+            </span>
+          </Link>
+        </li>
+      ) : null}
       {user ? (
         <li className="text-lg ">
           <Link to={isAdmin ? "/dashboard/adminhome" : "/dashboard/userhome"}>

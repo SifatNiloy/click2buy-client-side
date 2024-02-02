@@ -4,7 +4,9 @@ const UserHome = () => {
   const { user } = useAuth();
   return (
     <div className="">
-      <h2 className="text-4xl">Welcome!{user?.displayName} </h2>
+      <h2 className="text-4xl">
+        Welcome!{user?.displayName ? user.displayName : "Back"}{" "}
+      </h2>
     </div>
   );
 };
