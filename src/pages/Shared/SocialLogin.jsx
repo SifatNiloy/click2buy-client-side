@@ -12,32 +12,30 @@ const SocialLogin = () => {
   console.log("Redirecting from:", from);
 
   const handleGoogleSignIn = () => {
-    googleSignIn()
-      .then((result) => {
-        console.log("Social login successful:", result);
-        const loggedInUser = result.user;
-  
-        // Save user data
-        const saveUser = {
-          name: loggedInUser.displayName,
-          email: loggedInUser.email,
-          photo: loggedInUser.photoURL,
-        };
-  
-        fetch(`http://localhost:5000/users`, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(saveUser),
-        })
-          .then((res) => res.json())
-          .then(() => {
-            navigate(from, { replace: true });
-          });
-      });
+    googleSignIn().then((result) => {
+      console.log("Social login successful:", result);
+      const loggedInUser = result.user;
+
+      // Save user data
+      const saveUser = {
+        name: loggedInUser.displayName,
+        email: loggedInUser.email,
+        photo: loggedInUser.photoURL,
+      };
+
+      fetch(`https://click2buy-backend.sifatniloy.top/users`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(saveUser),
+      })
+        .then((res) => res.json())
+        .then(() => {
+          navigate(from, { replace: true });
+        });
+    });
   };
-  
 
   return (
     <div>

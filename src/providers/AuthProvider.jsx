@@ -51,7 +51,9 @@ const AuthProvider = ({ children }) => {
       //get and set token
       if (currentUser) {
         axios
-          .post("http://localhost:5000/jwt", { email: currentUser.email })
+          .post("https://click2buy-backend.sifatniloy.top/jwt", {
+            email: currentUser.email,
+          })
           .then((data) => {
             console.log(data.data);
             localStorage.setItem("access-token", data.data);
@@ -63,7 +65,6 @@ const AuthProvider = ({ children }) => {
       } else {
         localStorage.removeItem("access-token");
       }
-      
     });
     return () => {
       return unsubscribe();

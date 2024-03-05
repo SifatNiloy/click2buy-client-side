@@ -25,7 +25,7 @@ const AllUsers = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/users/${user._id}`, {
+        fetch(`https://click2buy-backend.sifatniloy.top/users/${user._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -47,7 +47,7 @@ const AllUsers = () => {
   const createAdmin = async (user) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/users/admin/${user._id}`,
+        `https://click2buy-backend.sifatniloy.top/users/admin/${user._id}`,
         {
           method: "PATCH",
           headers: {
