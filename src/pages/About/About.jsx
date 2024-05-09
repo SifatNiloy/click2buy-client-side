@@ -1,46 +1,60 @@
 const About = () => {
   return (
     <div className="mx-6">
-      <h2 className="text-4xl my-24">
+      <h2 className="text-4xl my-12 text-center text-gray-800">
         Experience Personalized Online Shopping in Bangladesh with Click2buy
       </h2>
-      <h5 className="text-sm my-12 text-left">
-        Online Shopping BD has never been easier. Click2Buy.com.bd is best
-        online shopping store in Bangladesh that features 10+ million products
-        at affordable prices. As bangaldesh online shopping landscape is
-        expanding every year, online shopping in dhaka, chittagong, khulna,
-        sylhet and other big cities are also gaining momentum. Click2Buy is
-        among best websites for online shopping in bangladesh that promises
-        fast, reliable and convenient delivery of products to your doorstep.
-        Click2Buy being the trusted online shop in Bangladesh aims to provide a
-        trouble-free shopping experience for the people of Bangladesh but is
-        also providing ample opportunity for international online shopping from
-        Bangladesh. Click2Buy aims to make online shopping accessible to all
-        parts of the country.
-      </h5>
-      <h5 className="text-sm text-left">
-        Everyone is encouraged to shop with confidence at Click2Buy.com.bd as
-        our strict buyers protection policies ensure no risks while shopping
-        online.
-      </h5>
-      <h5 className="text-sm text-left my-12">
-        Among tons of online stores in Bangladesh, Click2Buy aims to strictly
-        adhere to international quality standards ensuring trust and reliability
-        in customer service and originality in product delivery. Realizing the
-        surge in ecommerce platform in bangladesh, Click2Buy aims to redefine
-        online shopping experience with home delivery,cash on delivery and
-        installment facility for shoppers across country. Our assortment
-        includes 100% original products from leading electronics, fashion,
-        beauty, and lifestyle brands. Especially for shoppers who do not have
-        debit cards or credit cards, Click2Buy provides a facility of online
-        shopping with cash on delivery to your home. To enhance your online
-        shopping experience, we encourage you to download Click2Buy app for
-        Android & IOS and have a taste of personalized shopping experience based
-        on your interest and shopping needs. Watch BPL live on Click2Buy App
-        free. You can also check Click2Buy online shopping videos on YouTube to
-        have a clear idea. Click2Buy is a global online marketplace with
-        ecommerce stores in Pakistan, Bangladesh, Nepal, Sri Lanka and Myanmar.
-      </h5>
+      <div className="bg-yellow-100 rounded-lg p-8 my-8">
+        <h3 className="text-lg font-semibold mb-4 text-center text-yellow-800">
+          Welcome to Click2buy - Your Ultimate Online Shopping Destination in Bangladesh
+        </h3>
+        <p className="text-base text-gray-700 leading-relaxed">
+          Click2buy.com.bd is the leading online shopping destination in Bangladesh, offering over 10 million products at affordable prices. With a rapidly expanding online shopping landscape in Bangladesh, Click2buy is your go-to destination for convenient and reliable shopping experiences.
+        </p>
+      </div>
+      <div className="bg-blue-100 rounded-lg p-8 my-8">
+        <h3 className="text-lg font-semibold mb-4 text-center text-blue-800">
+          A Trusted Name in Online Shopping
+        </h3>
+        <p className="text-base text-gray-700 leading-relaxed">
+          At Click2buy, we prioritize customer satisfaction and safety. Our strict buyer protection policies ensure a risk-free shopping experience for every customer. Shop with confidence knowing that your transactions are secure and your products are authentic.
+        </p>
+      </div>
+      <div className="bg-green-100 rounded-lg p-8 my-8">
+        <h3 className="text-lg font-semibold mb-4 text-center text-green-800">
+          Redefining Online Shopping Experience
+        </h3>
+        <p className="text-base text-gray-700 leading-relaxed">
+          With Click2buy, we aim to redefine online shopping in Bangladesh. Our platform offers fast delivery, convenient payment options including cash on delivery and installment facilities, and a wide range of 100% original products from leading brands in electronics, fashion, beauty, and lifestyle.
+        </p>
+        <p className="text-base text-gray-700 leading-relaxed">
+          Explore our curated collections, discover exclusive deals, and stay updated with the latest trends - all in one place. Experience the convenience of online shopping with Click2buy, your global online marketplace.
+        </p>
+      </div>
+      <div className="bg-purple-100 rounded-lg p-8 my-8">
+        <h3 className="text-lg font-semibold mb-4 text-center text-purple-800">
+          Shop Anytime, Anywhere with Click2buy App
+        </h3>
+        <p className="text-base text-gray-700 leading-relaxed">
+          Download the Click2buy app for Android & iOS to enjoy a personalized shopping experience tailored to your interests and preferences. Watch live cricket matches, browse exclusive deals, and stay updated with the latest trends - all in one place. Experience the convenience of online shopping with Click2buy, your global online marketplace.
+        </p>
+      </div>
+      <div className="bg-yellow-100 rounded-lg p-8 my-8">
+        <h3 className="text-lg font-semibold mb-4 text-center text-yellow-800">
+          Our Commitment to Excellence
+        </h3>
+        <p className="text-base text-gray-700 leading-relaxed">
+          Click2buy is committed to providing an exceptional online shopping experience for every customer. We continuously strive to innovate and improve our services to meet the evolving needs and expectations of our users. Join us on our journey to revolutionize the way you shop online in Bangladesh and beyond.
+        </p>
+      </div>
+      <div className="bg-blue-100 rounded-lg p-8 my-8">
+        <h3 className="text-lg font-semibold mb-4 text-center text-blue-800">
+          Connect with Us
+        </h3>
+        <p className="text-base text-gray-700 leading-relaxed">
+          Have a question or feedback? We'd love to hear from you! Contact our customer support team for assistance or connect with us on social media for the latest updates, promotions, and more. Join the Click2buy community today and experience personalized online shopping like never before.
+        </p>
+      </div>
     </div>
   );
 };
