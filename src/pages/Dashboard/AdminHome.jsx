@@ -12,9 +12,12 @@ const AdminHome = () => {
       return res.data;
     },
   });
+  const customStyle = {
+    marginTop: "-300px"
+  };
   return (
-    <div>
-      <h2 className="font-bold text-3xl">Admin Home</h2>
+    <div style={customStyle}>
+      <h2 className="font-bold text-3xl mb-6">Admin Home</h2>
       <div className="stats bg-primary text-primary-content ">
         <div className="stat">
           <div className="stat-title text-white text-2xl font-bold">
