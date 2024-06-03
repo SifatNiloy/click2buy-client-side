@@ -82,7 +82,7 @@ const Navbar = () => {
         {user?.email ? (
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn  btn-success">
-              My Profile <img className="rounded-full w-1/4" src={user?.photoURL} alt="" />
+              My Profile <img className="rounded-full w-1/5" src={user?.photoURL} alt="" />
             </div>
             <ul
               tabIndex={0}
