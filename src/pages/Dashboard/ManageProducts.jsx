@@ -16,9 +16,7 @@ const ManageProducts = () => {
   } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await fetch(
-        "https://click2buy-backend.sifatniloy.top/products"
-      );
+      const res = await fetch("http://localhost:5000/products");
       const data = await res.json();
       setProducts(data.products);
     },

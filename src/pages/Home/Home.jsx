@@ -7,7 +7,7 @@ import Reviews from "./Reviews";
 
 const Home = () => {
   return (
-    <div className="mx-auto container">
+    <div className="mx-auto ">
       <Helmet>
         <title>Click2buy | Home</title>
       </Helmet>

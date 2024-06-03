@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { HiShoppingCart } from "react-icons/hi";
+import { HiMenu, HiShoppingCart } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import logo from "../../assets/logo.png";
@@ -64,7 +64,9 @@ const Navbar = () => {
             tabIndex={0}
             role="button"
             className="btn btn-ghost lg:hidden"
-          ></div>
+          >
+            <HiMenu className="text-2xl" />
+          </div>
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 rounded-box w-52"
@@ -72,6 +74,7 @@ const Navbar = () => {
             {navItems}
           </ul>
         </div>
+        
         <Link to="/">
           <img src={logo} alt="" />
         </Link>
