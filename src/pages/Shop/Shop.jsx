@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 
 import Products from "../Products/Products";
 import NotFound from "../Shared/NotFound";

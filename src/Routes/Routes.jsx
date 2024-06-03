@@ -20,6 +20,7 @@ import Shop from "../pages/Shop/Shop";
 import SignUp from "../pages/SignUp/SignUp";
 import AdminRoutes from "./AdminRoutes";
 import PrivateRoutes from "./PrivateRoutes";
+import Profile from "./Profile";
 
 export const router = createBrowserRouter([
   {
@@ -57,10 +58,15 @@ export const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
+        path: "/userProfile",
+        element: <Profile />,
+      },
+      {
         path: "/private",
         element: (
           <PrivateRoutes>
             <Private></Private>
+
           </PrivateRoutes>
         ),
       },
