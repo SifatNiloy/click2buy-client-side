@@ -60,11 +60,7 @@ const Navbar = () => {
     <div className="navbar bg-sky-200">
       <div className="navbar-start">
         <div className="dropdown">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost lg:hidden"
-          >
+          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <HiMenu className="text-2xl" />
           </div>
           <ul
@@ -74,7 +70,7 @@ const Navbar = () => {
             {navItems}
           </ul>
         </div>
-        
+
         <Link to="/">
           <img src={logo} alt="" />
         </Link>
@@ -84,11 +80,31 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user?.email ? (
-          <button onClick={logOut} className="btn btn-accent">
-            <Link to="/login">
-              Logout - <span>{user?.displayName}</span>{" "}
-            </Link>
-          </button>
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button" className="btn  btn-success">
+              My Profile <img className="rounded-full w-1/4" src={user?.photoURL} alt="" />
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content z-[3] menu p-2 shadow bg-green-100 rounded-box w-46"
+            >
+              <li className="p-2">
+              <button className="btn btn-accent">
+                  <Link to="/userProfile">
+                    Edit Profile
+                  </Link>
+                </button>
+              </li>
+              <li  className="p-2">
+                <button onClick={logOut} className="btn btn-accent">
+                  <Link to="/login">
+                    Logout - <span>{user?.displayName}</span>{" "}
+                  </Link>
+                </button>
+              </li>
+              
+            </ul>
+          </div>
         ) : (
           <button className="btn btn-accent">
             <Link to="/login">Login</Link>
