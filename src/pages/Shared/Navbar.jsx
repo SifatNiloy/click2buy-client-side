@@ -11,21 +11,22 @@ const Navbar = () => {
   const [isAdmin] = useAdmin();
   const [orders] = useCart();
 
-  const handleLogOut = () => {
-    logOut()
-      .then(() => {})
-      .catch((error) => console.log(error));
-  };
+  // const handleLogOut = () => {
+  //   logOut()
+  //     .then(() => {})
+  //     .catch((error) => console.log(error));
+  // };
   const navItems = (
     <>
       <li className="text-lg ">
         <Link to="/">Home</Link>
       </li>
-      <li className="text-lg ">
-        <Link to="/about">About</Link>
-      </li>
+      
       <li className="text-lg ">
         <Link to="/shop">Shop</Link>
+      </li>
+      <li className="text-lg ">
+        <Link to="/about">About</Link>
       </li>
       <li className="text-lg ">
         <Link to="/contact">Contact Us</Link>

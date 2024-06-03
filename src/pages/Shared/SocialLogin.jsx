@@ -23,7 +23,7 @@ const SocialLogin = () => {
         photo: loggedInUser.photoURL,
       };
 
-      fetch(`http://localhost:5000/users`, {
+      fetch(`https://click2buy-backend.sifatniloy.top/users`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

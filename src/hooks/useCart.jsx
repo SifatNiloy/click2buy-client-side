@@ -17,7 +17,7 @@ const useCart = () => {
         return []; // Return an empty array if user.email is not available
       }
       const res = await fetch(
-        `http://localhost:5000/orders?email=${user?.email}`,
+        `https://click2buy-backend.sifatniloy.top/orders?email=${user?.email}`,
         { headers: { authorization: `bearer ${token}` } }
       );
       return res.json();

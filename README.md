@@ -50,7 +50,7 @@ This frontend component is for an ecommecrce site, Click2buy , showing an intuit
 
 ## Contributors
 
-- [Your Name](https://github.com/SifatNiloy)
+- [Sifat Niloy](https://github.com/SifatNiloy)
 
 
 

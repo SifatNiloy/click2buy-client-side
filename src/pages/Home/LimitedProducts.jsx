@@ -4,7 +4,7 @@ import HomeProducts from "../Products/HomeProducts";
 const LimitedProducts = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    const url = `http://localhost:5000/limitedProduct`;
+    const url = `https://click2buy-backend.sifatniloy.top/limitedProduct`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
