@@ -11,11 +11,7 @@ const Navbar = () => {
   const [isAdmin] = useAdmin();
   const [orders] = useCart();
 
-  // const handleLogOut = () => {
-  //   logOut()
-  //     .then(() => {})
-  //     .catch((error) => console.log(error));
-  // };
+  
   const navItems = (
     <>
       <li className="text-lg ">
