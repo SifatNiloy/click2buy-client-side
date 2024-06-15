@@ -1,5 +1,3 @@
-// src/pages/Shared/Navbar.jsx
-
 import { useContext, useState } from "react";
 import {
   HiMenu,
