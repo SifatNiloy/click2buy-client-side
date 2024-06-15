@@ -1,109 +1,200 @@
-import { useContext } from "react";
-import { HiMenu, HiShoppingCart } from "react-icons/hi";
+// src/pages/Shared/Navbar.jsx
+
+import { useContext, useState } from "react";
+import {
+  HiMenu,
+  HiShoppingCart,
+  HiOutlineUserCircle,
+  HiOutlineLogout,
+  HiOutlineCog,
+  HiChevronDown,
+} from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import logo from "../../assets/logo.png";
 import useAdmin from "../../hooks/useAdmin";
 import useCart from "../../hooks/useCart";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isAdmin] = useAdmin();
   const [orders] = useCart();
+  const { width } = useWindowSize();
 
-  
+  const [isShopDropdownOpen, setShopDropdownOpen] = useState(false);
+  const [isMoreDropdownOpen, setMoreDropdownOpen] = useState(false);
+
+  const toggleShopDropdown = () => setShopDropdownOpen(!isShopDropdownOpen);
+  const toggleMoreDropdown = () => setMoreDropdownOpen(!isMoreDropdownOpen);
+
+  const closeDropdowns = () => {
+    setShopDropdownOpen(false);
+    setMoreDropdownOpen(false);
+  };
+
   const navItems = (
     <>
-      <li className="text-lg ">
+      <li className="text-base font-semibold hover:text-[#58C9C3] transition duration-200 ease-in-out relative">
         <Link to="/">Home</Link>
       </li>
-      
-      <li className="text-lg ">
-        <Link to="/shop">Shop</Link>
+      <li className="text-base font-semibold hover:text-[#58C9C3] transition duration-200 ease-in-out relative">
+        <button
+          className="flex items-center space-x-1"
+          onClick={toggleShopDropdown}
+        >
+          <span>Shop</span>
+          <HiChevronDown />
+        </button>
+        <ul
+          className={`dropdown-content absolute top-full left-0 mt-2 lg:mt-0 lg:left-auto lg:right-0 p-2 shadow-lg bg-white text-black rounded-md w-52 z-20 border border-gray-200 ${
+            isShopDropdownOpen ? "block" : "hidden"
+          }`}
+        >
+          <li>
+            <Link to="/shop" className="hover:bg-[#8388EA] p-2 rounded-md">
+              All Products
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/categories"
+              className="hover:bg-[#8388EA] p-2 rounded-md"
+            >
+              Categories
+            </Link>
+          </li>
+          <li>
+            <Link to="/offers" className="hover:bg-[#8388EA] p-2 rounded-md">
+              Special Offers
+            </Link>
+          </li>
+        </ul>
       </li>
-      <li className="text-lg ">
+      <li className="text-base font-semibold hover:text-[#58C9C3] transition duration-200 ease-in-out">
         <Link to="/about">About</Link>
       </li>
-      <li className="text-lg ">
+      <li className="text-base font-semibold hover:text-[#58C9C3] transition duration-200 ease-in-out">
         <Link to="/contact">Contact Us</Link>
       </li>
-      <li className="text-lg ">
-        <Link to="/sell">Sell</Link>
+      <li className="text-base font-semibold hover:text-[#58C9C3] transition duration-200 ease-in-out relative">
+        <button
+          className="flex items-center space-x-1"
+          onClick={toggleMoreDropdown}
+        >
+          <span>More</span>
+          <HiChevronDown />
+        </button>
+        <ul
+          className={`dropdown-content absolute top-full left-0 mt-2 lg:mt-0 lg:left-auto lg:right-0 p-2 shadow-lg bg-white text-black rounded-md w-52 z-20 border border-gray-200 ${
+            isMoreDropdownOpen ? "block" : "hidden"
+          }`}
+        >
+          <li>
+            <Link to="/sell" className="hover:bg-[#8388EA] p-2 rounded-md">
+              Sell
+            </Link>
+          </li>
+          <li>
+            <Link to="/support" className="hover:bg-[#8388EA] p-2 rounded-md">
+              Support
+            </Link>
+          </li>
+          <li>
+            <Link to="/faq" className="hover:bg-[#8388EA] p-2 rounded-md">
+              FAQ
+            </Link>
+          </li>
+        </ul>
       </li>
-
       {user ? (
-        <li className="text-lg mt-1">
+        <li className="text-base font-semibold mt-1 relative">
           <Link to={isAdmin ? "/dashboard/adminhome" : "/dashboard/userhome"}>
-            <HiShoppingCart />
-            <span className="badge badge-secondary">
-              +{orders?.length || 0}
+            <HiShoppingCart className="inline-block mr-1" />
+            <span className="badge badge-secondary absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white">
+              {orders?.length || 0}
             </span>
           </Link>
         </li>
       ) : null}
       {user ? (
-        <li className="text-lg ">
+        <li className="text-base font-semibold hover:text-[#58C9C3] transition duration-200 ease-in-out">
           <Link to={isAdmin ? "/dashboard/adminhome" : "/dashboard/userhome"}>
             Dashboard
           </Link>
         </li>
-      ) : (
-        <></>
-      )}
+      ) : null}
     </>
   );
 
   return (
-    <div className="navbar bg-sky-200">
+    <div className="navbar bg-gradient-to-r from-[#8388EA] via-[#8388EA] to-[#58C9C3] text-white shadow-lg z-30">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <button
+            tabIndex={0}
+            className="btn btn-ghost lg:hidden"
+            onClick={closeDropdowns}
+          >
             <HiMenu className="text-2xl" />
-          </div>
+          </button>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[30] p-2 shadow bg-white text-black rounded-md w-52 border border-gray-200"
           >
             {navItems}
           </ul>
         </div>
-
-        <Link to="/">
-          <img src={logo} alt="" />
+        <Link to="/" className="flex items-center space-x-2">
+          <img src={logo} alt="Click2Buy Logo" className="h-10" />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{navItems}</ul>
+        <ul className="menu menu-horizontal px-1 space-x-4">{navItems}</ul>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end space-x-4">
         {user?.email ? (
           <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn  btn-success">
-              My Profile <img className="rounded-full w-1/5" src={user?.photoURL} alt="" />
-            </div>
+            <button
+              tabIndex={0}
+              className="btn btn-success flex items-center space-x-2"
+            >
+              <HiOutlineUserCircle className="text-xl" />
+              <span>My Profile</span>
+              {width > 640 && (
+                <img
+                  className="rounded-full w-8 h-8 ml-2"
+                  src={user?.photoURL}
+                  alt="User"
+                />
+              )}
+            </button>
             <ul
               tabIndex={0}
-              className="dropdown-content z-[3] menu p-2 shadow bg-green-100 rounded-box w-46"
+              className="dropdown-content z-[30] menu p-2 shadow bg-white rounded-md w-52 text-black border border-gray-200"
             >
               <li className="p-2">
-              <button className="btn btn-accent">
-                  <Link to="/userProfile">
-                    Edit Profile
-                  </Link>
+                <Link
+                  to="/userProfile"
+                  className="flex items-center space-x-2 hover:bg-[#8388EA] rounded-md p-2"
+                >
+                  <HiOutlineCog />
+                  <span>Edit Profile</span>
+                </Link>
+              </li>
+              <li className="p-2">
+                <button
+                  onClick={logOut}
+                  className="flex items-center space-x-2 hover:bg-[#8388EA] rounded-md p-2"
+                >
+                  <HiOutlineLogout />
+                  <span>Logout - {user?.displayName}</span>
                 </button>
               </li>
-              <li  className="p-2">
-                <button onClick={logOut} className="btn btn-accent">
-                  <Link to="/login">
-                    Logout - <span>{user?.displayName}</span>{" "}
-                  </Link>
-                </button>
-              </li>
-              
             </ul>
           </div>
         ) : (
-          <button className="btn btn-accent">
+          <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md shadow-md transition duration-200 ease-in-out">
             <Link to="/login">Login</Link>
           </button>
         )}
