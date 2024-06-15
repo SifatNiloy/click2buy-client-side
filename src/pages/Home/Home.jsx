@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet";
 import Banner from "./Banner";
 import Brands from "./Brands";
-import Catagories from "./Catagories";
+import Categories from "./Categories";
 import LimitedProducts from "./LimitedProducts";
 import Reviews from "./Reviews";
 
@@ -12,7 +12,7 @@ const Home = () => {
         <title>Click2buy | Home</title>
       </Helmet>
       <Banner />
-      <Catagories />
+      <Categories />
       <Brands />
       <LimitedProducts />
       <Reviews />
