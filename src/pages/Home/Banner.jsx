@@ -74,19 +74,19 @@ const Banner = () => {
           <div key={index} className={`banner-slide ${index === currentIndex ? 'active' : ''}`} style={{ backgroundImage: `url(${slide.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
             <div className="absolute inset-0 flex items-center justify-center text-center text-white bg-black bg-opacity-50">
               <div className="mx-auto max-w-2xl px-6">
-                <h1 className="text-4xl font-bold mb-4">{slide.title}</h1>
-                <p className="text-lg mb-8">{slide.description}</p>
-                <Link to={slide.link} className="btn btn-accent">Shop Now</Link>
+              <h1 className="text-5xl lg:text-6xl font-bold mb-4 text-[#80C4E9]">{slide.title}</h1>
+                <p className="text-lg lg:text-xl mb-8 text-gray-200">{slide.description}</p>
+                <Link to={slide.link} className="btn btn-accent text-lg lg:text-xl">Shop Now</Link>
               </div>
             </div>
           </div>
         ))}
       </AutoplaySlider>
       <button className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 p-2 rounded-full text-white shadow-md hover:bg-opacity-70" onClick={prevSlide}>
-        <HiOutlineChevronLeft className="text-2xl" />
+        <HiOutlineChevronLeft className="text-3xl lg:text-4xl" />
       </button>
       <button className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 p-2 rounded-full text-white shadow-md hover:bg-opacity-70" onClick={nextSlide}>
-        <HiOutlineChevronRight className="text-2xl" />
+        <HiOutlineChevronRight className="text-3xl lg:text-4xl" />
       </button>
     </div>
   );
