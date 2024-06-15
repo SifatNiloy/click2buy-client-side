@@ -153,52 +153,53 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 space-x-4">{navItems}</ul>
       </div>
       <div className="navbar-end space-x-4">
-        {user?.email ? (
-          <div className="dropdown dropdown-end">
-            <button
-              tabIndex={0}
-              className="btn btn-success flex items-center space-x-2"
-            >
-              <HiOutlineUserCircle className="text-xl" />
-              <span>My Profile</span>
-              {width > 640 && (
-                <img
-                  className="rounded-full w-8 h-8 ml-2"
-                  src={user?.photoURL}
-                  alt="User"
-                />
-              )}
-            </button>
-            <ul
-              tabIndex={0}
-              className="dropdown-content z-[30] menu p-2 shadow bg-white rounded-md w-52 text-black border border-gray-200"
-            >
-              <li className="p-2">
-                <Link
-                  to="/userProfile"
-                  className="flex items-center space-x-2 hover:bg-[#8388EA] rounded-md p-2"
-                >
-                  <HiOutlineCog />
-                  <span>Edit Profile</span>
-                </Link>
-              </li>
-              <li className="p-2">
-                <button
-                  onClick={logOut}
-                  className="flex items-center space-x-2 hover:bg-[#8388EA] rounded-md p-2"
-                >
-                  <HiOutlineLogout />
-                  <span>Logout - {user?.displayName}</span>
-                </button>
-              </li>
-            </ul>
-          </div>
-        ) : (
-          <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md shadow-md transition duration-200 ease-in-out">
-            <Link to="/login">Login</Link>
-          </button>
+  {user?.email ? (
+    <div className="dropdown dropdown-end">
+      <button
+        tabIndex={0}
+        className="btn btn-success flex items-center space-x-2"
+      >
+        <HiOutlineUserCircle className="text-xl" />
+        <span>{user?.displayName?.split(" ")[0]}</span>
+        {width > 640 && (
+          <img
+            className="rounded-full w-8 h-8 ml-2"
+            src={user?.photoURL}
+            alt="User"
+          />
         )}
-      </div>
+      </button>
+      <ul
+        tabIndex={0}
+        className="dropdown-content z-[30] menu p-2 shadow bg-white rounded-md w-52 text-black border border-gray-200"
+      >
+        <li className="p-2">
+          <Link
+            to="/userProfile"
+            className="flex items-center space-x-2 hover:bg-[#8388EA] rounded-md p-2"
+          >
+            <HiOutlineCog />
+            <span>Edit Profile</span>
+          </Link>
+        </li>
+        <li className="p-2">
+          <button
+            onClick={logOut}
+            className="flex items-center space-x-2 hover:bg-[#8388EA] rounded-md p-2"
+          >
+            <HiOutlineLogout />
+            <span>Logout</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  ) : (
+    <button className="bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white px-4 py-2 rounded-md shadow-md transition duration-200 ease-in-out">
+      <Link to="/login">Login</Link>
+    </button>
+  )}
+</div>
+
     </div>
   );
 };

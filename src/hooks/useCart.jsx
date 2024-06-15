@@ -7,14 +7,14 @@ const useCart = () => {
   const token = localStorage.getItem("access-token");
   const {
     data: orders = [],
-    error,
+    // error,
     refetch,
   } = useQuery({
     queryKey: ["orders", user?.email],
     enabled: !loading,
     queryFn: async () => {
       if (!user?.email) {
-        return []; // Return an empty array if user.email is not available
+        return []; // Returns an empty array if user.email is not available
       }
       const res = await fetch(
         `https://click2buy-backend.sifatniloy.top/orders?email=${user?.email}`,
