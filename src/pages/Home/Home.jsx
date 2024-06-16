@@ -4,6 +4,7 @@ import Brands from "./Brands";
 import Categories from "./Categories";
 import LimitedProducts from "./LimitedProducts";
 import Reviews from "./Reviews";
+import NewsletterSignUp from "./NewsLetterSignUp";
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <Brands />
       <LimitedProducts />
       <Reviews />
+      <NewsletterSignUp/>
     </div>
   );
 };
