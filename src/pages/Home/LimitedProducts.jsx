@@ -3,21 +3,22 @@ import HomeProducts from "../Products/HomeProducts";
 
 const LimitedProducts = () => {
   const [products, setProducts] = useState([]);
+
   useEffect(() => {
     const url = `https://click2buy-backend.sifatniloy.top/limitedProduct`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
-        // console.log(data);
       });
   }, []);
+
   return (
-    <div className="my-24">
-      <h2 className="text-4xl font-bold text-success text-center my-8">
-        New products
+    <div className="container mx-auto my-12 p-4">
+      <h2 className="text-4xl font-bold text-center text-green-600 mb-12">
+        New Products
       </h2>
-      <div className="grid lg:grid-cols-4 place-items-center gap-6 sm:grid-cols-1 md:grid-cols-2 ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {products.map((product) => (
           <HomeProducts product={product} key={product._id} />
         ))}

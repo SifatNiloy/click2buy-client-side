@@ -1,15 +1,27 @@
+import { Link } from "react-router-dom";
+
 const HomeProducts = ({ product }) => {
-  const { name, seller, price, stock, ratings, img, quantity } = product;
+  const { name, price, img, description } = product;
+
   return (
-    <div className="card w-72 h-96 glass">
-      <figure>
-        <img src={img} alt="" />
+    <div className="card bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 w-full">
+      <figure className="relative w-full h-48 sm:h-56 md:h-64">
+        <img
+          src={img}
+          alt={name}
+          className="w-full h-full object-cover"
+        />
       </figure>
-      <div className="card-body items-center text-center">
-        <h2 className="card-title">{name}</h2>
-        <p>price : {price}</p>
-        <div className="card-actions justify-end">
-          <button className="btn btn-sm btn-info">Buy Now</button>
+      <div className="p-4 text-center">
+        <h2 className="text-lg font-semibold text-gray-800 mb-2">{name}</h2>
+        <p className="text-sm text-gray-600 mb-4">{description}</p>
+        <p className="text-lg font-bold text-gray-800">Price: ${price}</p>
+        <div className="mt-4">
+          <Link to="/shop">
+            <button className="btn btn-primary">
+              Buy Now
+            </button>
+          </Link>
         </div>
       </div>
     </div>
