@@ -21,6 +21,8 @@ import SignUp from "../pages/SignUp/SignUp";
 import AdminRoutes from "./AdminRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 import Profile from "./Profile";
+import Support from "../pages/Support/Support";
+import FAQ from "../pages/FAQ/FAQ";
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +62,14 @@ export const router = createBrowserRouter([
       {
         path: "/userProfile",
         element: <Profile />,
+      },
+      {
+        path: "/support",
+        element: <Support />,
+      },
+      {
+        path: "/faq",
+        element: <FAQ />,
       },
       {
         path: "/private",
