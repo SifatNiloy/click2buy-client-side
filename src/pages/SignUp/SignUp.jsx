@@ -1,10 +1,16 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import {
+  LoadCanvasTemplate,
+  loadCaptchaEnginge,
+  validateCaptcha,
+} from "react-simple-captcha";
 import { AuthContext } from "../../Providers/AuthProvider";
 import SocialLogin from "../Shared/SocialLogin";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const SignUp = () => {
   const {
@@ -12,52 +18,107 @@ const SignUp = () => {
     handleSubmit,
     reset,
     formState: { errors },
+    watch,
   } = useForm();
 
   const navigate = useNavigate();
   const { createUser, updateUserProfile } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const [captchaValid, setCaptchaValid] = useState(false);
+  const captchaRef = useRef(null);
+  const axiosSecure = useAxiosSecure();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    createUser(data.email, data.password).then((result) => {
+  useEffect(() => {
+    // Load the captcha when component mounts
+    loadCaptchaEnginge(6);
+  }, []);
+
+  const handlePhotoUpload = async (fileList) => {
+    const img_upload_token = import.meta.env.VITE_IMG_UPLOAD_TOKEN;
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_upload_token}`;
+
+    if (fileList.length > 0) {
+      const formData = new FormData();
+      formData.append("image", fileList[0]);
+
+      const response = await fetch(img_hosting_url, {
+        method: "POST",
+        body: formData,
+      });
+      const imgData = await response.json();
+      if (imgData.success) {
+        return imgData.data.display_url;
+      }
+    }
+    return "";
+  };
+
+  const handleValidateCaptcha = () => {
+    const userCaptchaValue = captchaRef.current.value;
+    if (validateCaptcha(userCaptchaValue)) {
+      setCaptchaValid(true);
+    } else {
+      setCaptchaValid(false);
+    }
+  };
+
+  const onSubmit = async (data) => {
+    if (!captchaValid) {
+      Swal.fire({
+        icon: "error",
+        title: "Captcha Error",
+        text: "Please complete the captcha correctly.",
+      });
+      return;
+    }
+
+    if (data.password !== data.confirmPassword) {
+      Swal.fire({
+        icon: "error",
+        title: "Password Error",
+        text: "Passwords do not match.",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const imgURL = data.photo[0] ? await handlePhotoUpload(data.photo) : "";
+      const result = await createUser(data.email, data.password);
       const loggedUser = result.user;
-      // console.log(loggedUser);
 
-      updateUserProfile(data.name, data.photoURL)
-        .then(() => {
-          console.log("user profile info updated");
-          const saveUser = {
-            name: data.name,
-            email: data.email,
-            photo: data.photoURL,
-          };
-          fetch(`http://localhost:5000/users`, {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(saveUser),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.insertedId) {
-                reset();
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title: "User Created Successfully",
-                  showConfirmButton: false,
-                  timer: 1000,
-                });
-                navigate("/");
-              }
-            });
-        })
-        .catch((error) => {
-          console.log(error);
+      await updateUserProfile(data.name, imgURL);
+
+      const saveUser = {
+        name: data.name,
+        email: data.email,
+        photo: imgURL,
+      };
+
+      const response = await axiosSecure.post("/users", saveUser);
+
+      if (response.data.insertedId) {
+        reset();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "User Created Successfully",
+          showConfirmButton: false,
+          timer: 1000,
         });
-    });
-    // reset();
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Sign Up Error:", error.message);
+      Swal.fire({
+        icon: "error",
+        title: "Sign Up Failed",
+        text: error.message,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -84,7 +145,7 @@ const SignUp = () => {
                 <input
                   type="text"
                   name="name"
-                  placeholder="name"
+                  placeholder="Enter your name"
                   className="input input-bordered"
                   {...register("name", {
                     required: "Name is required",
@@ -103,25 +164,22 @@ const SignUp = () => {
                   })}
                 />
                 {errors.name && (
-                  <span className="text-red-600">{errors.name?.message}</span>
+                  <span className="text-red-600">{errors.name.message}</span>
                 )}
               </div>
+
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">photo url</span>
+                  <span className="label-text">Profile Photo (optional)</span>
                 </label>
                 <input
-                  type="text"
-                  placeholder="upload your photo"
+                  type="file"
+                  accept="image/*"
+                  {...register("photo")}
                   className="input input-bordered"
-                  {...register("photoURL", {
-                    required: "Name is required",
-                  })}
                 />
-                {errors.photoURL && (
-                  <span className="text-red-600">photourl is required</span>
-                )}
               </div>
+
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -129,16 +187,17 @@ const SignUp = () => {
                 <input
                   type="email"
                   name="email"
-                  placeholder="email"
+                  placeholder="Enter your email"
                   className="input input-bordered"
                   {...register("email", {
                     required: "Email is required",
                   })}
                 />
                 {errors.email && (
-                  <span className="text-red-600">{errors.email?.message}</span>
+                  <span className="text-red-600">{errors.email.message}</span>
                 )}
               </div>
+
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Password</span>
@@ -146,7 +205,7 @@ const SignUp = () => {
                 <input
                   type="password"
                   name="password"
-                  placeholder="password"
+                  placeholder="Enter your password"
                   className="input input-bordered"
                   {...register("password", {
                     required: "Password is required",
@@ -167,30 +226,68 @@ const SignUp = () => {
                   })}
                 />
                 {errors.password && (
+                  <span className="text-red-600">{errors.password.message}</span>
+                )}
+              </div>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Confirm Password</span>
+                </label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Confirm your password"
+                  className="input input-bordered"
+                  {...register("confirmPassword", {
+                    validate: (value) =>
+                      value === watch("password") || "Passwords do not match",
+                  })}
+                />
+                {errors.confirmPassword && (
                   <span className="text-red-600">
-                    {errors.password?.message}
+                    {errors.confirmPassword.message}
                   </span>
                 )}
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
               </div>
+
+              <div className="form-control">
+                <label className="label">
+                  <LoadCanvasTemplate />
+                </label>
+                <input
+                  ref={captchaRef}
+                  type="text"
+                  name="captcha"
+                  placeholder="Type the text"
+                  className="input input-bordered"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={handleValidateCaptcha}
+                  className="btn btn-outline btn-xs mt-3"
+                >
+                  Validate
+                </button>
+              </div>
+
               <div className="form-control mt-6">
                 <input
-                  className="btn btn-primary"
+                  className={`btn btn-primary ${
+                    isLoading ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
                   type="submit"
                   value="Sign Up"
+                  disabled={isLoading || !captchaValid}
                 />
               </div>
               <p>
-                Already have an account?
+                Already have an account?{" "}
                 <Link className="text-warning" to="/login">
                   Please Login
                 </Link>
               </p>
-
               <div className="divider">OR</div>
               <SocialLogin />
             </form>
