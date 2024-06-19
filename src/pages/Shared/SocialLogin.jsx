@@ -11,30 +11,43 @@ const SocialLogin = () => {
   const from = location.state?.from?.pathname || "/";
   console.log("Redirecting from:", from);
 
-  const handleGoogleSignIn = () => {
-    googleSignIn().then((result) => {
-      console.log("Social login successful:", result);
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await googleSignIn();
       const loggedInUser = result.user;
+      console.log('Logged in user:', loggedInUser);
+
+      // Check if email is present before saving
+      if (!loggedInUser.email) {
+        throw new Error("Email is not available");
+      }
 
       // Save user data
       const saveUser = {
         name: loggedInUser.displayName,
         email: loggedInUser.email,
-        photo: loggedInUser.photoURL,
+        photoURL: loggedInUser.photoURL,
       };
 
-      fetch(`http://localhost:5000/users`, {
+      const response = await fetch("http://localhost:5000/users", {
         method: "POST",
         headers: {
-          "content-type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(saveUser),
-      })
-        .then((res) => res.json())
-        .then(() => {
-          navigate(from, { replace: true });
-        });
-    });
+      });
+
+      if (response.ok) {
+        navigate(from, { replace: true });
+      } else if (response.status === 400) {
+        console.error("User already exists");
+        // Handle user already exists case, maybe notify the user
+      } else {
+        console.error("Failed to save user:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Google sign-in error:", error);
+    }
   };
 
   return (

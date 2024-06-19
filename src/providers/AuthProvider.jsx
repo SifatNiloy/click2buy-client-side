@@ -1,24 +1,28 @@
-import axios from "axios";
+
+import axios from 'axios';
 import {
-  GoogleAuthProvider,
-  createUserWithEmailAndPassword,
   getAuth,
-  onAuthStateChanged,
+  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
   updateProfile,
-} from "firebase/auth";
-import React, { createContext, useEffect, useState } from "react";
-import { app } from "../firebase/firebase.config";
+  GoogleAuthProvider,
+  onAuthStateChanged,
+} from 'firebase/auth';
+import React, { createContext, useEffect, useState, useContext } from 'react';
+import { app } from '../firebase/firebase.config';
 
 export const AuthContext = createContext(null);
 
 const auth = getAuth(app);
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [token, setToken] = useState(null);
   const googleProvider = new GoogleAuthProvider();
+
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -28,13 +32,20 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+
   const googleSignIn = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
+
   const logOut = () => {
     setLoading(true);
-    return signOut(auth);
+    return signOut(auth).then(() => {
+      setUser(null);
+      setToken(null);
+      localStorage.removeItem('access-token');
+      setLoading(false);
+    });
   };
 
   const updateUserProfile = (name, photo) => {
@@ -45,34 +56,33 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      console.log("current user", currentUser);
-      //get and set token
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
-        axios
-          .post("http://localhost:5000/jwt", {
+        setUser(currentUser);
+        try {
+          const response = await axios.post('http://localhost:5000/jwt', {
             email: currentUser.email,
-          })
-          .then((data) => {
-            console.log(data.data);
-            localStorage.setItem("access-token", data.data);
-            setLoading(false);
-          })
-          .catch(function (error) {
-            console.log(error);
           });
+          const tokenData = response.data;
+          setToken(tokenData);
+          localStorage.setItem('access-token', tokenData);
+        } catch (error) {
+          console.error('Error fetching token:', error);
+        }
       } else {
-        localStorage.removeItem("access-token");
+        setUser(null);
+        setToken(null);
+        localStorage.removeItem('access-token');
       }
+      setLoading(false);
     });
-    return () => {
-      return unsubscribe();
-    };
+    return () => unsubscribe();
   }, []);
+
   const authInfo = {
     user,
     loading,
+    token,
     createUser,
     signIn,
     logOut,
@@ -80,9 +90,16 @@ const AuthProvider = ({ children }) => {
     googleSignIn,
   };
 
-  return (
-    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
+};
+
+// Custom hook to use auth information
+export const useAuth = () => {
+  const authContext = useContext(AuthContext);
+  if (!authContext) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return authContext;
 };
 
 export default AuthProvider;
