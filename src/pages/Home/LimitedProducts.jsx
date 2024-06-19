@@ -5,7 +5,7 @@ const LimitedProducts = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const url = `https://click2buy-backend.sifatniloy.top/limitedProduct`;
+    const url = `http://localhost:5000/limitedProduct`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {

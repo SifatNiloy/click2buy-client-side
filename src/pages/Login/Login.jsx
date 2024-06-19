@@ -19,6 +19,7 @@ const Login = () => {
   const location = useLocation();
 
   let from = location.state?.from?.pathname || "/";
+  
   useEffect(() => {
     // Load captcha only if it's not already loaded
     if (!captchaRef.current || !captchaRef.current.loaded) {
@@ -26,39 +27,56 @@ const Login = () => {
       captchaRef.current.loaded = true; // Mark as loaded
     }
   }, []);
+
   const handleValidateCaptcha = () => {
     const user_captcha_value = captchaRef.current.value;
-    if (validateCaptcha(user_captcha_value) == true) {
+    if (validateCaptcha(user_captcha_value) === true) {
       setDisabled(false);
     } else {
       setDisabled(true);
     }
   };
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
-    signIn(email, password).then((result) => {
+    
+    try {
+      const result = await signIn(email, password);
       const user = result.user;
-      console.log(user);
+
+      // Display success message
       Swal.fire({
         position: "top-end",
         icon: "success",
-        title: "User Logged in successful",
+        title: "User logged in successfully",
         showConfirmButton: false,
         timer: 1000,
       });
+
+      // Store token in localStorage
+      localStorage.setItem("access-token", result.token);
+
+      // Redirect to previous or home page
       navigate(from, { replace: true });
-    });
+    } catch (error) {
+      console.error("Login error:", error);
+
+      // Display error message
+      Swal.fire({
+        icon: "error",
+        title: "Login failed",
+        text: error.message,
+      });
+    }
   };
 
   return (
     <>
       <Helmet>
-        <title> Login</title>
+        <title>Login</title>
       </Helmet>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col md:flex-row-reverse">
@@ -70,7 +88,7 @@ const Login = () => {
               et a id nisi.
             </p>
           </div>
-          <div className="card md:w-1/2  max-w-sm shadow-2xl bg-base-100">
+          <div className="card md:w-1/2 max-w-sm shadow-2xl bg-base-100">
             <form onSubmit={handleLogin} className="card-body">
               <div className="form-control">
                 <label className="label">
@@ -79,7 +97,7 @@ const Login = () => {
                 <input
                   type="email"
                   name="email"
-                  placeholder="email"
+                  placeholder="Email"
                   className="input input-bordered"
                   required
                 />
@@ -91,7 +109,7 @@ const Login = () => {
                 <input
                   type="password"
                   name="password"
-                  placeholder="password"
+                  placeholder="Password"
                   className="input input-bordered"
                   required
                 />
@@ -108,13 +126,13 @@ const Login = () => {
                 <input
                   ref={captchaRef}
                   type="text"
-                  name="capcha"
-                  placeholder="type the text "
+                  name="captcha"
+                  placeholder="Type the text"
                   className="input input-bordered"
                   required
                 />
                 <button
-                  type="button" // Add this line to prevent form submission
+                  type="button"
                   onClick={handleValidateCaptcha}
                   className="btn btn-outline btn-xs mt-3"
                 >
@@ -132,12 +150,11 @@ const Login = () => {
               <p>
                 New to click2buy?{" "}
                 <Link className="text-warning" to="/signup">
-                  Please signup
+                  Please sign up
                 </Link>{" "}
               </p>
-
               <div className="divider">OR</div>
-              <SocialLogin/>
+              <SocialLogin />
             </form>
           </div>
         </div>

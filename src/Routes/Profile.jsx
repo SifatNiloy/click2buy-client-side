@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
 
 const Profile = () => {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, loading, updateUserProfile } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState({
     displayName: user?.displayName || "",
@@ -17,6 +17,12 @@ const Profile = () => {
     setIsEditing(!isEditing);
     setError("");
     setSuccessMessage("");
+    // Reseting editedUser state when toggling edit mode
+    setEditedUser({
+      displayName: user?.displayName || "",
+      email: user?.email || "",
+      password: "",
+    });
   };
 
   const handleChange = (e) => {
@@ -48,34 +54,48 @@ const Profile = () => {
     setSuccessMessage("");
 
     try {
-      const token = localStorage.getItem("token");
-      const response = await fetch(
-        "https://click2buy-backend.sifatniloy.top/api/user/profile",
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(editedUser),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
+      const token = localStorage.getItem("access-token");
+      if (!token) {
+        setError("Authentication token is missing.");
+        return;
       }
 
-      const data = await response.json();
-      setUser(data);
-      setIsEditing(false);
+      const updatedUserData = {};
+      
+      // Update display name if changed
+      if (editedUser.displayName !== user.displayName) {
+        await updateUserProfile(editedUser.displayName, user.photoURL);
+        updatedUserData.displayName = editedUser.displayName;
+      }
+
+      // Update email if changed (Note: Firebase requires reauthentication for email updates)
+      if (editedUser.email !== user.email) {
+        setError("To update email, please use the Firebase Authentication API.");
+        setIsLoading(false);
+        return;
+      }
+
+      // Update password if provided
+      if (editedUser.password) {
+        // will implement my logic to update password if needed that involves using Firebase Auth API, handle reauthentication and update
+        setError("To update password, please use the Firebase Authentication API.");
+        setIsLoading(false);
+        return;
+      }
+
       setSuccessMessage("Profile updated successfully!");
+      setIsEditing(false);
     } catch (error) {
-      setError("Error updating profile. Please try again.");
+      setError(`Error updating profile: ${error.message}`);
       console.error("Error updating profile:", error);
     } finally {
       setIsLoading(false);
     }
   };
+
+  if (loading) {
+    return <p>Loading...</p>; 
+  }
 
   return (
     <div className="max-w-md mx-auto my-20 bg-white shadow-md rounded-lg overflow-hidden">
@@ -141,6 +161,7 @@ const Profile = () => {
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-lg focus:ring focus:border-blue-500"
               aria-label="Edit Password"
+              placeholder="Leave blank if not changing"
             />
             <p className="text-sm text-gray-500 mt-1">Leave blank if you don't want to change the password.</p>
           </div>

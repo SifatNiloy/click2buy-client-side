@@ -25,7 +25,7 @@ const Products = ({ product }) => {
         email: user.email,
       };
       console.log("Order Item:", orderItem);
-      fetch("https://click2buy-backend.sifatniloy.top/orders", {
+      fetch("http://localhost:5000/orders", {
         method: "POST",
         headers: {
           "content-type": "application/json",

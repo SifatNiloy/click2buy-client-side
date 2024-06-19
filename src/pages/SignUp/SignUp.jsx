@@ -31,7 +31,7 @@ const SignUp = () => {
             email: data.email,
             photo: data.photoURL,
           };
-          fetch(`https://click2buy-backend.sifatniloy.top/users`, {
+          fetch(`http://localhost:5000/users`, {
             method: "POST",
             headers: {
               "content-type": "application/json",
