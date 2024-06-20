@@ -1,5 +1,4 @@
-
-import axios from 'axios';
+import axios from "axios";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -9,9 +8,9 @@ import {
   updateProfile,
   GoogleAuthProvider,
   onAuthStateChanged,
-} from 'firebase/auth';
-import React, { createContext, useEffect, useState, useContext } from 'react';
-import { app } from '../firebase/firebase.config';
+} from "firebase/auth";
+import React, { createContext, useEffect, useState, useContext } from "react";
+import { app } from "../firebase/firebase.config";
 
 export const AuthContext = createContext(null);
 
@@ -43,7 +42,7 @@ const AuthProvider = ({ children }) => {
     return signOut(auth).then(() => {
       setUser(null);
       setToken(null);
-      localStorage.removeItem('access-token');
+      localStorage.removeItem("access-token");
       setLoading(false);
     });
   };
@@ -60,19 +59,22 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         setUser(currentUser);
         try {
-          const response = await axios.post('http://localhost:5000/jwt', {
-            email: currentUser.email,
-          });
+          const response = await axios.post(
+            "https://click2buy-api.sifatniloy.top/jwt",
+            {
+              email: currentUser.email,
+            }
+          );
           const tokenData = response.data;
           setToken(tokenData);
-          localStorage.setItem('access-token', tokenData);
+          localStorage.setItem("access-token", tokenData);
         } catch (error) {
-          console.error('Error fetching token:', error);
+          console.error("Error fetching token:", error);
         }
       } else {
         setUser(null);
         setToken(null);
-        localStorage.removeItem('access-token');
+        localStorage.removeItem("access-token");
       }
       setLoading(false);
     });
@@ -90,14 +92,16 @@ const AuthProvider = ({ children }) => {
     googleSignIn,
   };
 
-  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 // Custom hook to use auth information
 export const useAuth = () => {
   const authContext = useContext(AuthContext);
   if (!authContext) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return authContext;
 };

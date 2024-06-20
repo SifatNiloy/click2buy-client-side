@@ -9,7 +9,7 @@ const Shop = () => {
   const [size, setSize] = useState(10);
   const pages = Math.ceil(count / size);
   useEffect(() => {
-    const url = `http://localhost:5000/products?page=${page}&size=${size}`;
+    const url = `https://click2buy-api.sifatniloy.top/products?page=${page}&size=${size}`;
     // console.log(page, size)
     fetch(url)
       .then((res) => res.json())
@@ -23,7 +23,9 @@ const Shop = () => {
     var key = document.getElementById("myInput").value;
 
     if (key) {
-      let result = await fetch(`http://localhost:5000/products/${key}`);
+      let result = await fetch(
+        `https://click2buy-api.sifatniloy.top/products/${key}`
+      );
       result = await result.json();
       if (result) {
         setProducts(result);

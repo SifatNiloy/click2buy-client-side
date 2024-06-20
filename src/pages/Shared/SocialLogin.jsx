@@ -15,7 +15,7 @@ const SocialLogin = () => {
     try {
       const result = await googleSignIn();
       const loggedInUser = result.user;
-      console.log('Logged in user:', loggedInUser);
+      console.log("Logged in user:", loggedInUser);
 
       // Check if email is present before saving
       if (!loggedInUser.email) {
@@ -29,19 +29,21 @@ const SocialLogin = () => {
         photoURL: loggedInUser.photoURL,
       };
 
-      const response = await fetch("http://localhost:5000/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(saveUser),
-      });
+      const response = await fetch(
+        "https://click2buy-api.sifatniloy.top/users",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(saveUser),
+        }
+      );
 
       if (response.ok) {
         navigate(from, { replace: true });
       } else if (response.status === 400) {
         console.error("User already exists");
-        // Handle user already exists case, maybe notify the user
       } else {
         console.error("Failed to save user:", response.statusText);
       }
