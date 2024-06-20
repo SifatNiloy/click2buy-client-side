@@ -11,45 +11,30 @@ const SocialLogin = () => {
   const from = location.state?.from?.pathname || "/";
   console.log("Redirecting from:", from);
 
-  const handleGoogleSignIn = async () => {
-    try {
-      const result = await googleSignIn();
+  const handleGoogleSignIn = () => {
+    googleSignIn().then((result) => {
+      console.log("Social login successful:", result);
       const loggedInUser = result.user;
-      console.log("Logged in user:", loggedInUser);
-
-      // Check if email is present before saving
-      if (!loggedInUser.email) {
-        throw new Error("Email is not available");
-      }
 
       // Save user data
       const saveUser = {
         name: loggedInUser.displayName,
         email: loggedInUser.email,
-        photoURL: loggedInUser.photoURL,
+        photo: loggedInUser.photoURL,
       };
 
-      const response = await fetch(
-        "https://click2buy-api.sifatniloy.top/users",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(saveUser),
-        }
-      );
-
-      if (response.ok) {
-        navigate(from, { replace: true });
-      } else if (response.status === 400) {
-        console.error("User already exists");
-      } else {
-        console.error("Failed to save user:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Google sign-in error:", error);
-    }
+      fetch(`https://click2buy-api.sifatniloy.top/users`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(saveUser),
+      })
+        .then((res) => res.json())
+        .then(() => {
+          navigate(from, { replace: true });
+        });
+    });
   };
 
   return (
