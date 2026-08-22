@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -59,15 +58,9 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         setUser(currentUser);
         try {
-          const response = await axios.post(
-            "https://click2buy-backend.onrender.com/api/auth/jwt",
-            {
-              email: currentUser.email,
-            }
-          );
-          const tokenData = response.data;
-          setToken(tokenData);
-          localStorage.setItem("access-token", tokenData);
+          const idToken = await currentUser.getIdToken();
+          setToken(idToken);
+          localStorage.setItem("access-token", idToken);
         } catch (error) {
           console.error("Error fetching token:", error);
         }

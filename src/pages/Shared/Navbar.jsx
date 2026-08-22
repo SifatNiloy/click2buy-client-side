@@ -143,12 +143,12 @@ const Navbar = () => {
   );
 
   return (
-    <div ref={navRef} className="navbar min-h-0 sticky top-0 z-30 bg-[#17211f] px-4 py-2 text-white shadow-lg md:px-8">
+    <div ref={navRef} className="navbar min-h-0 sticky top-0 z-30 bg-[#e3efeb] px-4 py-2 text-[#254b46] shadow-lg md:px-8">
       <div className="navbar-start">
         <div className="dropdown">
           <button
             tabIndex={0}
-            className="btn btn-ghost h-9 min-h-0 w-9 p-1 text-white lg:hidden"
+            className="btn btn-ghost h-9 min-h-0 w-9 p-1 text-[#254b46] lg:hidden"
             onClick={closeDropdowns}
           >
             <HiMenu className="text-2xl" />
@@ -165,14 +165,14 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="flex items-center gap-8 px-1 text-white">{navItems}</ul>
+        <ul className="flex items-center gap-8 px-1 text-[#254b46]">{navItems}</ul>
       </div>
       <div className="navbar-end space-x-2">
   {user?.email ? (
     <div className="dropdown dropdown-end">
       <button
         tabIndex={0}
-        className="btn btn-success flex items-center space-x-2"
+              className="flex items-center space-x-2 bg-[#c9e2dc] px-3 py-2 text-[#254b46]"
       >
         <HiOutlineUserCircle className="text-xl" />
         <span>{user?.displayName?.split(" ")[0]}</span>

@@ -49,7 +49,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/sell",
-        element: <Sell />,
+        element: (
+          <PrivateRoutes>
+            <Sell />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/login",

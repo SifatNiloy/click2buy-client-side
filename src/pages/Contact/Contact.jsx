@@ -1,90 +1,15 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet";
+import { HiArrowRight, HiOutlineMail, HiOutlineQuestionMarkCircle } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
-  // State for form inputs
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [sent, setSent] = useState(false);
+  const updateField = (event) => setForm({ ...form, [event.target.name]: event.target.value });
+  const handleSubmit = (event) => { event.preventDefault(); setSent(true); setForm({ name: "", email: "", message: "" }); };
 
-  // Function to handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Logic to handle form submission
-    // Reset form fields after submission
-    setName("");
-    setEmail("");
-    setMessage("");
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="container mx-auto py-12 px-4">
-        <div className="flex flex-col md:flex-row justify-center items-center">
-          <div className="md:w-2/5 mr-8">
-            <h3 className="text-2xl mb-4">Get in Touch</h3>
-            <p className="mb-4">
-              Have a question or need assistance? Feel free to contact us. Our customer support team is here to help!
-            </p>
-            <p className="mb-4">
-              <strong>Email:</strong> support@click2buy.com
-            </p>
-            <p>
-              <strong>Phone:</strong> 1-800-123-4567
-            </p>
-          </div>
-          <div className="md:w-3/5 mr-8">
-            <h3 className="text-2xl mb-4">Send us a Message</h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="flex flex-col">
-                <label htmlFor="name" className="text-lg font-medium text-gray-700 mb-2">
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="flex flex-col">
-                <label htmlFor="email" className="text-lg font-medium text-gray-700 mb-2">
-                  Your Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="flex flex-col">
-                <label htmlFor="message" className="text-lg font-medium text-gray-700 mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  required
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="bg-indigo-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
-              >
-                Submit
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  return <main className="min-h-screen bg-[#f7f6f1] text-[#254b46]"><Helmet><title>Click2buy | Contact</title></Helmet><section className="bg-[#e3efeb]"><div className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24"><p className="eyebrow">We are listening</p><h1 className="max-w-3xl text-5xl font-bold leading-none md:text-7xl">Let’s talk about your order.</h1><p className="mt-6 max-w-xl text-lg leading-8 text-[#52716b]">Whether you have a question about a product, an order, or the shopping experience, send us a note and we will point you in the right direction.</p></div></section><section className="mx-auto grid max-w-7xl gap-12 px-5 py-16 md:grid-cols-[0.7fr_1.3fr] md:px-8 md:py-24"><div><p className="eyebrow">Before you write</p><h2 className="text-3xl font-bold md:text-4xl">A little detail helps.</h2><p className="mt-5 leading-7 text-[#66726d]">For an order question, include the name on the order and any useful product detail. Please do not send passwords or payment information.</p><div className="mt-10 space-y-6 border-t border-[#c9e2dc] pt-6"><div className="flex gap-4"><HiOutlineMail className="mt-1 text-2xl text-[#0d7b72]" /><div><h3 className="font-bold">Email us</h3><a href="mailto:support@click2buy.com" className="mt-1 block text-sm text-[#52716b] hover:text-[#d85e4b]">support@click2buy.com</a></div></div><div className="flex gap-4"><HiOutlineQuestionMarkCircle className="mt-1 text-2xl text-[#0d7b72]" /><div><h3 className="font-bold">Looking for a quick answer?</h3><Link to="/faq" className="mt-1 inline-flex items-center gap-2 text-sm text-[#52716b] hover:text-[#d85e4b]">Visit the FAQ <HiArrowRight /></Link></div></div></div></div><div className="border border-[#c9e2dc] bg-white p-6 md:p-10"><h2 className="text-3xl font-bold">Send a message</h2>{sent && <p className="mt-4 border-l-2 border-[#0d7b72] bg-[#e3efeb] p-4 text-sm text-[#254b46]">Thanks, your message is ready for the Click2Buy team.</p>}<form onSubmit={handleSubmit} className="mt-8 space-y-5"><label className="block text-sm font-bold">Name<input name="name" value={form.name} onChange={updateField} required className="mt-2 block w-full border border-[#c8ccc5] px-4 py-3 font-normal outline-none focus:border-[#0d7b72]" /></label><label className="block text-sm font-bold">Email<input name="email" type="email" value={form.email} onChange={updateField} required className="mt-2 block w-full border border-[#c8ccc5] px-4 py-3 font-normal outline-none focus:border-[#0d7b72]" /></label><label className="block text-sm font-bold">What can we help with?<textarea name="message" rows="5" value={form.message} onChange={updateField} required className="mt-2 block w-full resize-y border border-[#c8ccc5] px-4 py-3 font-normal outline-none focus:border-[#0d7b72]" /></label><button type="submit" className="inline-flex items-center gap-3 bg-[#ef765f] px-6 py-3 text-sm font-bold text-[#254b46] transition hover:bg-[#d85e4b]">Send message <HiArrowRight /></button></form></div></section></main>;
 };
 
 export default Contact;

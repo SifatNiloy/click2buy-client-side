@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 :root {
-	--ink: #17211f;
+	--ink: #254b46;
 	--muted: #66726d;
 	--paper: #f7f6f1;
 	--cream: #eeede6;
@@ -26,19 +26,19 @@ h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
 
 .navbar .navbar-center > ul > li > a,
 .navbar .navbar-center > ul > li > button {
-	color: #ffffff;
+	color: #254b46;
 }
 
 .navbar .navbar-center > ul > li > a:hover,
 .navbar .navbar-center > ul > li > button:hover,
 .navbar .navbar-center > ul > li > a:focus-visible,
 .navbar .navbar-center > ul > li > button:focus-visible {
-	color: #f6b59f;
+	color: #d85e4b;
 }
 
 .navbar .dropdown-content a,
 .navbar .dropdown-content button {
-	color: #17211f;
+	color: #254b46;
 }
 
 @layer components {
