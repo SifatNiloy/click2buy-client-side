@@ -1,16 +1,11 @@
-import AwesomeSlider from "react-awesome-slider";
-import withAutoplay from "react-awesome-slider/dist/autoplay";
-import "react-awesome-slider/dist/styles.css";
 import home from "../../assets/banner/home.jpg";
 import travel from "../../assets/banner/travel.jpg";
 import beauty from "../../assets/banner/beauty.jpg";
 import tech from "../../assets/banner/tech.jpg";
 import toy from "../../assets/banner/toy.jpg";
 import { useEffect, useState } from "react";
-import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
+import { HiArrowRight, HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi";
 import { Link } from "react-router-dom";
-
-const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -50,7 +45,7 @@ const Banner = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex === slides.length - 1 ? 0 : prevIndex + 1));
-    }, 3000); // Set interval to 3 seconds
+    }, 5000);
     return () => clearInterval(interval);
   }, [slides.length]);
 
@@ -63,31 +58,26 @@ const Banner = () => {
   };
 
   return (
-    <div className="relative">
-      <AutoplaySlider
-        animation="cubeAnimation"
-        play={true} // Enable autoplay
-        cancelOnInteraction={false}
-        interval={3000} // Set interval to 3 seconds
-      >
-        {slides.map((slide, index) => (
-          <div key={index} className={`banner-slide ${index === currentIndex ? 'active' : ''}`} style={{ backgroundImage: `url(${slide.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-            <div className="absolute inset-0 flex items-center justify-center text-center text-white bg-black bg-opacity-50">
-              <div className="mx-auto max-w-2xl px-6">
-              <h1 className="text-5xl lg:text-6xl font-bold mb-4 text-[#80C4E9]">{slide.title}</h1>
-                <p className="text-lg lg:text-xl mb-8 text-gray-200">{slide.description}</p>
-                <Link to={slide.link} className="btn btn-accent text-lg lg:text-xl">Shop Now</Link>
-              </div>
+    <div className="relative min-h-[620px] bg-[#17211f] text-white md:min-h-[680px]">
+      {slides.map((slide, index) => (
+        <div key={slide.title} className={`absolute inset-0 transition-opacity duration-700 ${index === currentIndex ? "opacity-100" : "pointer-events-none opacity-0"}`} style={{ backgroundImage: `linear-gradient(90deg, rgba(23,33,31,.9) 0%, rgba(23,33,31,.58) 48%, rgba(23,33,31,.12) 100%), url(${slide.image})`, backgroundSize: "cover", backgroundPosition: "center" }}>
+          <div className="mx-auto flex min-h-[620px] max-w-7xl items-center px-6 py-20 md:min-h-[680px] md:px-8">
+            <div className="reveal max-w-2xl">
+              <p className="mb-5 text-xs font-bold uppercase tracking-[0.3em] text-[#f6b59f]">Curated for your everyday</p>
+              <h1 className="max-w-xl text-5xl font-bold leading-[1.02] md:text-7xl">{slide.title}</h1>
+              <p className="mt-6 max-w-lg text-base leading-7 text-white/75 md:text-lg">{slide.description}</p>
+              <Link to={slide.link} className="mt-8 inline-flex items-center gap-3 bg-[#ef765f] px-6 py-4 text-sm font-bold text-white transition hover:bg-[#d85e4b] hover:gap-5">Shop the collection <HiArrowRight className="text-lg" /></Link>
             </div>
           </div>
-        ))}
-      </AutoplaySlider>
-      <button className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 p-2 rounded-full text-white shadow-md hover:bg-opacity-70" onClick={prevSlide}>
-        <HiOutlineChevronLeft className="text-3xl lg:text-4xl" />
-      </button>
-      <button className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 p-2 rounded-full text-white shadow-md hover:bg-opacity-70" onClick={nextSlide}>
-        <HiOutlineChevronRight className="text-3xl lg:text-4xl" />
-      </button>
+        </div>
+      ))}
+      <div className="absolute bottom-8 left-0 right-0 mx-auto flex max-w-7xl items-center justify-between px-6 md:px-8">
+        <div className="flex gap-2">{slides.map((slide, index) => <button aria-label={`Show ${slide.title}`} key={slide.title} onClick={() => setCurrentIndex(index)} className={`h-1 transition-all ${index === currentIndex ? "w-12 bg-[#ef765f]" : "w-5 bg-white/40"}`} />)}</div>
+        <div className="flex gap-2">
+          <button aria-label="Previous slide" className="border border-white/40 p-3 transition hover:bg-white hover:text-[#17211f]" onClick={prevSlide}><HiOutlineChevronLeft className="text-xl" /></button>
+          <button aria-label="Next slide" className="border border-white/40 p-3 transition hover:bg-white hover:text-[#17211f]" onClick={nextSlide}><HiOutlineChevronRight className="text-xl" /></button>
+        </div>
+      </div>
     </div>
   );
 };

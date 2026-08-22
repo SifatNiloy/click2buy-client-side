@@ -14,16 +14,14 @@ const LimitedProducts = () => {
   }, []);
 
   return (
-    <div className="container mx-auto my-12 p-4">
-      <h2 className="text-4xl font-bold text-center text-green-600 mb-12">
-        New Products
-      </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <section className="store-section">
+      <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p className="eyebrow">Fresh arrivals</p><h2 className="section-heading">New to the shelf.</h2></div><a href="/shop" className="section-link">See the full edit <span>→</span></a></div>
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {products.map((product) => (
           <HomeProducts product={product} key={product._id} />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

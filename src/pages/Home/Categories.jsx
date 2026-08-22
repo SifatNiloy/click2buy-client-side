@@ -24,56 +24,35 @@ const Categories = () => {
       name: "Watches",
       description: "Find premium watches that combine style and functionality.",
     },
-    {
-      id: 4,
-      image: smartphone,
-      name: "Smartphones",
-      description: "Explore a wide range of smartphones from top brands.",
-    },
-    {
-      id: 5,
-      image: sneakers,
-      name: "Sneakers",
-      description: "Stay trendy with our latest collection of sneakers.",
-    },
   ];
 
   return (
-    <div className="container mx-auto my-12 px-4">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-3xl font-bold text-gray-800">
-          Explore Popular Categories
-        </h2>
-        <p className="text-xl text-gray-600">
-          <Link
-            to="/shop"
-            className="text-indigo-600 hover:text-indigo-800 transition duration-300"
-          >
-            See All
-          </Link>
-        </p>
+    <section className="store-section">
+      <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+        <div><p className="eyebrow">Start browsing</p><h2 className="section-heading">Find your next favorite.</h2></div>
+        <Link to="/shop" className="section-link">View all categories <span>→</span></Link>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
         {categories.map((category) => (
           <div
             key={category.id}
-            className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg"
+            className="group overflow-hidden border border-[#dedfd8] bg-white transition duration-300 hover:-translate-y-2 hover:shadow-xl"
           >
             <img
               src={category.image}
               alt={category.name}
-              className="object-cover w-full h-48 sm:h-64 rounded-t-lg"
+              className="h-56 w-full object-cover transition duration-700 group-hover:scale-105 sm:h-64"
             />
-            <div className="p-4">
-              <p className="text-lg font-semibold text-gray-800 mb-2">
+            <div className="p-5">
+              <p className="mb-2 text-lg font-bold text-[#17211f]">
                 {category.name}
               </p>
-              <p className="text-sm text-gray-600">{category.description}</p>
+              <p className="text-sm leading-6 text-[#66726d]">{category.description}</p>
             </div>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

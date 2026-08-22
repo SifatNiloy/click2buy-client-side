@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   HiMenu,
   HiShoppingCart,
@@ -22,6 +22,7 @@ const Navbar = () => {
 
   const [isShopDropdownOpen, setShopDropdownOpen] = useState(false);
   const [isMoreDropdownOpen, setMoreDropdownOpen] = useState(false);
+  const navRef = useRef(null);
 
   const toggleShopDropdown = () => setShopDropdownOpen(!isShopDropdownOpen);
   const toggleMoreDropdown = () => setMoreDropdownOpen(!isMoreDropdownOpen);
@@ -31,10 +32,25 @@ const Navbar = () => {
     setMoreDropdownOpen(false);
   };
 
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) closeDropdowns();
+    };
+    const handleEscape = (event) => {
+      if (event.key === "Escape") closeDropdowns();
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
   const navItems = (
     <>
       <li className="text-base font-semibold hover:text-[#58C9C3] transition duration-200 ease-in-out relative">
-        <Link to="/">Home</Link>
+        <Link to="/" onClick={closeDropdowns}>Home</Link>
       </li>
       <li className="text-base font-semibold hover:text-[#58C9C3] transition duration-200 ease-in-out relative">
         <button
@@ -45,35 +61,36 @@ const Navbar = () => {
           <HiChevronDown />
         </button>
         <ul
-          className={`dropdown-content absolute top-full left-0 mt-2 lg:mt-0 lg:left-auto lg:right-0 p-2 shadow-lg bg-white text-black rounded-md w-52 z-20 border border-gray-200 ${
+          className={`dropdown-content absolute top-full left-0 mt-2 lg:mt-0 lg:left-auto lg:right-0 p-1 shadow-lg bg-white text-black rounded-lg w-48 z-20 border border-[#dedfd8] ${
             isShopDropdownOpen ? "block" : "hidden"
           }`}
         >
-          <li>
-            <Link to="/shop" className="hover:bg-[#8388EA] p-2 rounded-md">
+            <li>
+              <Link to="/shop" onClick={closeDropdowns} className="block rounded px-3 py-2 text-sm hover:bg-[#0d7b72] hover:text-white">
               All Products
             </Link>
           </li>
           <li>
-            <Link
-              to="/categories"
-              className="hover:bg-[#8388EA] p-2 rounded-md"
+              <Link
+                to="/shop"
+                onClick={closeDropdowns}
+                className="block rounded px-3 py-2 text-sm hover:bg-[#0d7b72] hover:text-white"
             >
               Categories
             </Link>
           </li>
           <li>
-            <Link to="/offers" className="hover:bg-[#8388EA] p-2 rounded-md">
+              <Link to="/shop" onClick={closeDropdowns} className="block rounded px-3 py-2 text-sm hover:bg-[#0d7b72] hover:text-white">
               Special Offers
             </Link>
           </li>
         </ul>
       </li>
       <li className="text-base font-semibold hover:text-[#58C9C3] transition duration-200 ease-in-out">
-        <Link to="/about">About</Link>
+        <Link to="/about" onClick={closeDropdowns}>About</Link>
       </li>
       <li className="text-base font-semibold hover:text-[#58C9C3] transition duration-200 ease-in-out">
-        <Link to="/contact">Contact Us</Link>
+        <Link to="/contact" onClick={closeDropdowns}>Contact Us</Link>
       </li>
       <li className="text-base font-semibold hover:text-[#58C9C3] transition duration-200 ease-in-out relative">
         <button
@@ -84,22 +101,22 @@ const Navbar = () => {
           <HiChevronDown />
         </button>
         <ul
-          className={`dropdown-content absolute top-full left-0 mt-2 lg:mt-0 lg:left-auto lg:right-0 p-2 shadow-lg bg-white text-black rounded-md w-52 z-20 border border-gray-200 ${
+          className={`dropdown-content absolute top-full left-0 mt-2 lg:mt-0 lg:left-auto lg:right-0 p-1 shadow-lg bg-white text-black rounded-lg w-48 z-20 border border-[#dedfd8] ${
             isMoreDropdownOpen ? "block" : "hidden"
           }`}
         >
           <li>
-            <Link to="/sell" className="hover:bg-[#8388EA] p-2 rounded-md">
+              <Link to="/sell" onClick={closeDropdowns} className="block rounded px-3 py-2 text-sm hover:bg-[#0d7b72] hover:text-white">
               Sell
             </Link>
           </li>
           <li>
-            <Link to="/support" className="hover:bg-[#8388EA] p-2 rounded-md">
+              <Link to="/support" onClick={closeDropdowns} className="block rounded px-3 py-2 text-sm hover:bg-[#0d7b72] hover:text-white">
               Support
             </Link>
           </li>
           <li>
-            <Link to="/faq" className="hover:bg-[#8388EA] p-2 rounded-md">
+              <Link to="/faq" onClick={closeDropdowns} className="block rounded px-3 py-2 text-sm hover:bg-[#0d7b72] hover:text-white">
               FAQ
             </Link>
           </li>
@@ -107,7 +124,7 @@ const Navbar = () => {
       </li>
       {user ? (
         <li className="text-base font-semibold mt-1 relative">
-          <Link to={isAdmin ? "/dashboard/adminhome" : "/dashboard/userhome"}>
+          <Link onClick={closeDropdowns} to={isAdmin ? "/dashboard/adminhome" : "/dashboard/userhome"}>
             <HiShoppingCart className="inline-block mr-1" />
             <span className="badge badge-secondary absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white">
               {orders?.length || 0}
@@ -117,7 +134,7 @@ const Navbar = () => {
       ) : null}
       {user ? (
         <li className="text-base font-semibold hover:text-[#58C9C3] transition duration-200 ease-in-out">
-          <Link to={isAdmin ? "/dashboard/adminhome" : "/dashboard/userhome"}>
+          <Link onClick={closeDropdowns} to={isAdmin ? "/dashboard/adminhome" : "/dashboard/userhome"}>
             Dashboard
           </Link>
         </li>
@@ -126,12 +143,12 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-gradient-to-r from-[#8388EA] via-[#8388EA] to-[#58C9C3] text-white shadow-lg z-30">
+    <div ref={navRef} className="navbar min-h-0 sticky top-0 z-30 bg-[#17211f] px-4 py-2 text-white shadow-lg md:px-8">
       <div className="navbar-start">
         <div className="dropdown">
           <button
             tabIndex={0}
-            className="btn btn-ghost lg:hidden"
+            className="btn btn-ghost h-9 min-h-0 w-9 p-1 text-white lg:hidden"
             onClick={closeDropdowns}
           >
             <HiMenu className="text-2xl" />
@@ -144,13 +161,13 @@ const Navbar = () => {
           </ul>
         </div>
         <Link to="/" className="flex items-center space-x-2">
-          <img src={logo} alt="Click2Buy Logo" className="h-10" />
+          <img src={logo} alt="Click2Buy Logo" className="h-8 md:h-9" />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 space-x-4">{navItems}</ul>
+        <ul className="flex items-center gap-8 px-1 text-white">{navItems}</ul>
       </div>
-      <div className="navbar-end space-x-4">
+      <div className="navbar-end space-x-2">
   {user?.email ? (
     <div className="dropdown dropdown-end">
       <button
@@ -169,12 +186,13 @@ const Navbar = () => {
       </button>
       <ul
         tabIndex={0}
-        className="dropdown-content z-[30] menu p-2 shadow bg-white rounded-md w-52 text-black border border-gray-200"
+              className="dropdown-content z-[30] menu p-1 shadow-lg bg-white rounded-lg w-48 text-black border border-[#dedfd8]"
       >
         <li className="p-2">
           <Link
             to="/userProfile"
-            className="flex items-center space-x-2 hover:bg-[#8388EA] rounded-md p-2"
+            onClick={closeDropdowns}
+                  className="flex items-center space-x-2 rounded-md p-2 text-sm hover:bg-[#0d7b72] hover:text-white"
           >
             <HiOutlineCog />
             <span>Edit Profile</span>
@@ -183,7 +201,7 @@ const Navbar = () => {
         <li className="p-2">
           <button
             onClick={logOut}
-            className="flex items-center space-x-2 hover:bg-[#8388EA] rounded-md p-2"
+                  className="flex items-center space-x-2 rounded-md p-2 text-sm hover:bg-[#0d7b72] hover:text-white"
           >
             <HiOutlineLogout />
             <span>Logout</span>
@@ -192,7 +210,7 @@ const Navbar = () => {
       </ul>
     </div>
   ) : (
-    <button className="bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white px-4 py-2 rounded-md shadow-md transition duration-200 ease-in-out">
+    <button className="bg-[#ef765f] px-4 py-2 font-bold text-white shadow-md transition duration-200 ease-in-out hover:bg-[#d85e4b]">
       <Link to="/login">Login</Link>
     </button>
   )}

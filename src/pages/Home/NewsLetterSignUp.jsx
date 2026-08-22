@@ -22,28 +22,25 @@ const NewsletterSignUp = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-500 to-purple-600 py-16 px-6 lg:px-32 rounded-lg shadow-lg text-white my-16 mx-auto w-full max-w-3xl">
-      <h2 className="text-3xl lg:text-4xl font-bold text-center mb-8">Subscribe to our Newsletter</h2>
-      <p className="text-center mb-10 text-lg">Stay updated with our latest news and special offers.</p>
-      <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
+    <section className="store-section pt-8"><div className="relative overflow-hidden bg-[#0d7b72] px-6 py-14 text-white md:px-16 md:py-20"><div className="relative z-10 max-w-2xl"><p className="eyebrow text-[#f6b59f]">A little good news</p>
+      <h2 className="text-4xl font-bold leading-tight md:text-6xl">The good stuff, delivered.</h2>
+      <p className="mt-5 max-w-lg text-lg leading-7 text-white/75">New drops, thoughtful edits, and offers worth opening your inbox for.</p>
+      <div className="mt-8 flex flex-col gap-3 sm:flex-row">
         <input
           type="email"
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full sm:w-auto lg:flex-1 px-6 py-4 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+          className="w-full border-0 bg-white px-5 py-4 text-[#17211f] outline-none placeholder:text-[#66726d] focus:ring-2 focus:ring-[#f6b59f] sm:flex-1"
         />
         <button
           onClick={handleSubscribe}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-8 rounded-lg shadow-lg transition duration-300"
+          className="bg-[#ef765f] px-7 py-4 font-bold text-white transition hover:bg-[#d85e4b]"
         >
           Subscribe
         </button>
       </div>
-      <p className="text-center mt-8 text-sm lg:text-base">
-        We respect your privacy. Unsubscribe at any time.
-      </p>
-    </div>
+      </div><p className="mt-5 text-xs text-white/55">No noise. Unsubscribe whenever you like.</p></div></section>
   );
 };
 
