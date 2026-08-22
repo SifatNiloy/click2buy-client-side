@@ -18,7 +18,7 @@ const MyOrders = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://click2buy-api.sifatniloy.top/orders/${item._id}`, {
+        fetch(`https://click2buy-backend.onrender.com/api/orders/${item._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

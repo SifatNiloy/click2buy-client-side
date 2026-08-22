@@ -5,7 +5,8 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import useCart from "../../hooks/useCart";
 
 const Products = ({ product }) => {
-  const { name, seller, price, stock, ratings, img, _id } = product;
+  const { name, brand, price, stock, rating, images, img, _id } = product;
+  const image = images?.[0] || img;
   const { user } = useContext(AuthContext);
   const [cart, refetch] = useCart();
   const navigate = useNavigate();
@@ -17,15 +18,15 @@ const Products = ({ product }) => {
       const orderItem = {
         productId: _id,
         name,
-        seller,
+        seller: brand,
         price,
         stock,
-        ratings,
-        img,
+        ratings: rating,
+        img: image,
         email: user.email,
       };
       console.log("Order Item:", orderItem);
-      fetch("https://click2buy-api.sifatniloy.top/orders", {
+      fetch("https://click2buy-backend.onrender.com/api/orders", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -63,15 +64,15 @@ const Products = ({ product }) => {
   return (
     <div className="card card-compact w-72 bg-base-100 shadow-xl mt-12">
       <figure>
-        <img src={img} />
+        <img src={image} alt={name} />
       </figure>
       <div className="card-body">
         <h2 className="card-title">{name}</h2>
         <div className="grid grid-cols-2">
           <p className="font-bold text-blue-500">Price : {price}</p>
           <p>Stock : {stock}</p>
-          <p>Seller : {seller}</p>
-          <p>ratings:{ratings} </p>
+          <p>Brand : {brand}</p>
+          <p>Rating: {rating} </p>
         </div>
         <div className="card-actions justify-center">
           <button

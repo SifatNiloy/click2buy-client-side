@@ -5,17 +5,17 @@ import NotFound from "../Shared/NotFound";
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const [count, setCount] = useState(0);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [size, setSize] = useState(10);
   const pages = Math.ceil(count / size);
   useEffect(() => {
-    const url = `https://click2buy-api.sifatniloy.top/products?page=${page}&size=${size}`;
+    const url = `https://click2buy-backend.onrender.com/api/products?page=${page}&size=${size}`;
     // console.log(page, size)
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        setCount(data.count);
-        setProducts(data.products);
+        setCount(data.data?.count || 0);
+        setProducts(data.data?.products || []);
       });
   }, [page, size]);
   const handleSearch = async (event) => {
@@ -24,11 +24,11 @@ const Shop = () => {
 
     if (key) {
       let result = await fetch(
-        `https://click2buy-api.sifatniloy.top/products/${key}`
+        `https://click2buy-backend.onrender.com/api/products/search/${key}`
       );
       result = await result.json();
-      if (result) {
-        setProducts(result);
+      if (result.data?.products) {
+        setProducts(result.data.products);
       } else {
         alert("Not found");
       }
