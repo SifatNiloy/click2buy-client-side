@@ -17,7 +17,7 @@ const useCart = () => {
         return []; // Returns an empty array if user.email is not available
       }
       const res = await fetch(
-        `https://click2buy-api.sifatniloy.top/orders?email=${user?.email}`,
+        `https://click2buy-backend.onrender.com/api/orders?email=${user?.email}`,
         { headers: { authorization: `bearer ${token}` } }
       );
       return res.json();

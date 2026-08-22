@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 
 const HomeProducts = ({ product }) => {
-  const { name, price, img, description } = product;
+  const { name, price, images, img, description } = product;
+  const image = images?.[0] || img;
 
   return (
     <div className="card bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 w-full">
       <figure className="relative w-full h-48 sm:h-56 md:h-64">
         <img
-          src={img}
+          src={image}
           alt={name}
           className="w-full h-full object-cover"
         />

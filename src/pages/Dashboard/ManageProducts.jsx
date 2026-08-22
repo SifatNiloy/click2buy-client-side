@@ -17,7 +17,7 @@ const ManageProducts = () => {
     queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/products`
+        "https://click2buy-backend.onrender.com/api/products"
       );
       const data = await res.json();
       setProducts(data.products);

@@ -5,11 +5,11 @@ const LimitedProducts = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const url = `https://click2buy-api.sifatniloy.top/limitedProduct`;
+    const url = `https://click2buy-backend.onrender.com/api/products/featuredProducts`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data);
+        setProducts(data.data?.products || []);
       });
   }, []);
 
