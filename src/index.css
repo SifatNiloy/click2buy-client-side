@@ -1,4 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+	--ink: #254b46;
+	--muted: #66726d;
+	--paper: #f7f6f1;
+	--cream: #eeede6;
+	--teal: #0d7b72;
+	--coral: #ef765f;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+	margin: 0;
+	background: var(--paper);
+	color: var(--ink);
+	font-family: 'DM Sans', sans-serif;
+}
+
+h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+.navbar .navbar-center > ul > li > a,
+.navbar .navbar-center > ul > li > button {
+	color: #254b46;
+}
+
+.navbar .navbar-center > ul > li > a:hover,
+.navbar .navbar-center > ul > li > button:hover,
+.navbar .navbar-center > ul > li > a:focus-visible,
+.navbar .navbar-center > ul > li > button:focus-visible {
+	color: #d85e4b;
+}
+
+.navbar .dropdown-content a,
+.navbar .dropdown-content button {
+	color: #254b46;
+}
+
+@layer components {
+	.store-section { @apply mx-auto w-full max-w-7xl px-5 py-16 md:px-8 md:py-24; }
+	.eyebrow { @apply mb-3 text-xs font-bold uppercase tracking-[0.24em] text-[#ef765f]; }
+	.section-heading { @apply text-3xl font-bold tracking-tight text-[#17211f] md:text-5xl; }
+	.section-link { @apply inline-flex items-center gap-2 border-b-2 border-[#0d7b72] pb-1 text-sm font-bold text-[#0d7b72] transition hover:gap-3; }
+	.reveal { animation: rise-in 0.7s ease both; }
+}
+
+@keyframes rise-in {
+	from { opacity: 0; transform: translateY(18px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
+	*, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
 

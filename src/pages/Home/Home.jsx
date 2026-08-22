@@ -8,7 +8,7 @@ import NewsletterSignUp from "./NewsLetterSignUp";
 
 const Home = () => {
   return (
-    <div className="mx-auto ">
+    <main className="overflow-hidden">
       <Helmet>
         <title>Click2buy | Home</title>
       </Helmet>
@@ -17,8 +17,8 @@ const Home = () => {
       <Brands />
       <LimitedProducts />
       <Reviews />
-      <NewsletterSignUp/>
-    </div>
+      <NewsletterSignUp />
+    </main>
   );
 };
 

@@ -7,71 +7,24 @@ import { Link } from "react-router-dom";
 
 const Brands = () => {
   return (
-    <div className="container mx-auto my-12 px-4">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-3xl font-bold">Explore Popular Brands</h2>
-        <p className="text-xl text-gray-600">
-          <Link
-            to="/shop"
-            className="text-indigo-600 hover:text-indigo-800 transition duration-300"
-          >
-            See All
-          </Link>
-        </p>
+    <section className="bg-[#17211f] text-white">
+      <div className="store-section">
+      <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+        <div><p className="eyebrow">Good company</p><h2 className="section-heading text-white">The names you trust.</h2></div>
+        <Link to="/shop" className="section-link border-[#f6b59f] text-[#f6b59f]">Browse every brand <span>→</span></Link>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-        <div className="rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-5 md:gap-5">
+        {[{ image: apple, name: "Apple" }, { image: samsung, name: "Samsung" }, { image: sony, name: "Sony" }, { image: xiaomi, name: "Xiaomi" }, { image: nike, name: "Nike" }].map((brand) => <div key={brand.name} className="group relative overflow-hidden border border-white/10">
           <img
-            src={apple}
-            alt="Apple"
-            className="object-cover w-full h-48 sm:h-56 md:h-64 rounded-t-lg"
+            src={brand.image}
+            alt={brand.name}
+            className="h-52 w-full object-cover opacity-75 transition duration-700 group-hover:scale-110 group-hover:opacity-100 md:h-64"
           />
-          <div className="p-4 text-center">
-            <p className="text-lg font-semibold text-gray-800">Apple</p>
-          </div>
-        </div>
-        <div className="rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105">
-          <img
-            src={samsung}
-            alt="Samsung"
-            className="object-cover w-full h-48 sm:h-56 md:h-64 rounded-t-lg"
-          />
-          <div className="p-4 text-center">
-            <p className="text-lg font-semibold text-gray-800">Samsung</p>
-          </div>
-        </div>
-        <div className="rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105">
-          <img
-            src={sony}
-            alt="Sony"
-            className="object-cover w-full h-48 sm:h-56 md:h-64 rounded-t-lg"
-          />
-          <div className="p-4 text-center">
-            <p className="text-lg font-semibold text-gray-800">Sony</p>
-          </div>
-        </div>
-        <div className="rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105">
-          <img
-            src={xiaomi}
-            alt="Xiaomi"
-            className="object-cover w-full h-48 sm:h-56 md:h-64 rounded-t-lg"
-          />
-          <div className="p-4 text-center">
-            <p className="text-lg font-semibold text-gray-800">Xiaomi</p>
-          </div>
-        </div>
-        <div className="rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300 transform hover:scale-105">
-          <img
-            src={nike}
-            alt="Nike"
-            className="object-cover w-full h-48 sm:h-56 md:h-64 rounded-t-lg"
-          />
-          <div className="p-4 text-center">
-            <p className="text-lg font-semibold text-gray-800">Nike</p>
-          </div>
-        </div>
+          <p className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-4 pb-4 pt-12 text-lg font-bold">{brand.name}</p>
+        </div>)}
       </div>
-    </div>
+      </div>
+    </section>
   );
 };
 
