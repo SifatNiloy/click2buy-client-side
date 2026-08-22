@@ -16,7 +16,9 @@ const ManageProducts = () => {
   } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await fetch("https://click2buy-api.sifatniloy.top/products");
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/products`
+      );
       const data = await res.json();
       setProducts(data.products);
     },
@@ -45,6 +47,14 @@ const ManageProducts = () => {
           }
         });
       }
+    });
+  };
+
+  const handleUpdate = () => {
+    Swal.fire({
+      title: "Update unavailable",
+      text: "Product editing is not implemented yet.",
+      icon: "info",
     });
   };
   return (
