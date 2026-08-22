@@ -60,7 +60,7 @@ const AuthProvider = ({ children }) => {
         setUser(currentUser);
         try {
           const response = await axios.post(
-            "https://click2buy-api.sifatniloy.top/jwt",
+            `${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/auth/jwt`,
             {
               email: currentUser.email,
             }
